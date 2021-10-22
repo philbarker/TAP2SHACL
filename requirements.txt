@@ -1,0 +1,5 @@
+rdflib
+-e git+https://github.com/philbarker/AP2SHACL#egg=ap2shacl
+-e git+https://github.com/philbarker/APClasses#egg=AP
+-e git+https://github.com/philbarker/TAP2AP#egg=TAP2AP
+https://github.com/dcmi/dctap-python/archive/main.zip

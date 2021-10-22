@@ -1,0 +1,13 @@
+prefix,URI,Note
+sh,http://www.w3.org/ns/shacl#,SHACL
+rdf,http://www.w3.org/1999/02/22-rdf-syntax-ns#,RDF
+rdfs,http://www.w3.org/2000/01/rdf-schema#,RDF Schema
+xsd,http://www.w3.org/2001/XMLSchema#,XSD: use for data types
+,http://example.org/terms#,default
+ex,http://example.org/terms#,example
+dc,http://purl.org/dc/elements/1.1/,"Dublin Core Metadata Element Set, Version 1.1"
+dct,http://purl.org/dc/terms/,DCMI Metadata Terms
+foaf,http://xmlns.com/foaf/0.1/,Friend of a Friend
+sdo,https://schema.org/,Schema.org
+skos,http://www.w3.org/2004/02/skos/core#,Simple Knowledge Organization System
+base,http://example.org/shapes#
