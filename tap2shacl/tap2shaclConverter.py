@@ -23,8 +23,8 @@ class TAP2SHACLConverter:
     def convertAP2SHACL(self):
         return self.ap2shaclConverter.convert_AP_SHACL()
 
-    def dump_shacl(self):
-        self.ap2shaclConverter.dump_shacl()
+    def dump_shacl(self, fname=None):
+        self.ap2shaclConverter.dump_shacl(fname)
 
     def dump_ap(self):
         self.tap2apConverter.ap.dump()

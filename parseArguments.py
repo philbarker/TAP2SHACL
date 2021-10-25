@@ -6,6 +6,7 @@ configFileName = "dctap.yml"
 namespaceFileName = "examples/bookAP/namespaces.csv"
 aboutFileName = "examples/bookAP/about.csv"
 shapesFileName = "examples/bookAP/shapes.csv"
+outputFileName = None
 
 
 def parse_arguments():
@@ -41,5 +42,12 @@ def parse_arguments():
         type=str,
         metavar="<shapes csv file>",
         default=shapesFileName,
+    )
+    parser.add_argument(
+        "-o",
+        "--outputFileName",
+        type=str,
+        metavar="<output file>",
+        default=outputFileName,
     )
     return parser.parse_args()
