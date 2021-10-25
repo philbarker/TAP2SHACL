@@ -9,5 +9,5 @@ if __name__ == "__main__":
     c = TAP2SHACLConverter(tapFName, args.configFileName)
     c.convertTAP2AP(args.namespaceFileName, args.aboutFileName, args.shapesFileName)
     c.convertAP2SHACL()
-#    c.dump_ap()
+    #    c.dump_ap()
     c.dump_shacl()
