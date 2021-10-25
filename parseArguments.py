@@ -1,11 +1,11 @@
 from argparse import ArgumentParser
 
 # defaults
-tapFileName = "tests/TestData/booksTAP.csv"
-configFileName = "tests/TestData/dctap.yml"
-namespaceFileName = "tests/TestData/booksTAP-namespaces.csv"
-aboutFileName = "tests/TestData/booksTAP-about.csv"
-shapesFileName = "tests/TestData/booksTAP-shapes.csv"
+tapFileName = "examples/bookAP/tap.csv"
+configFileName = "dctap.yml"
+namespaceFileName = "examples/bookAP/namespaces.csv"
+aboutFileName = "examples/bookAP/about.csv"
+shapesFileName = "examples/bookAP/shapes.csv"
 
 def parse_arguments():
     parser = ArgumentParser(
