@@ -1,11 +1,11 @@
 from argparse import ArgumentParser
 
 # defaults
-tapFileName = "examples/bookAP/tap.csv"
+tapFileName = "tap.csv"
 configFileName = "dctap.yml"
-namespaceFileName = "examples/bookAP/namespaces.csv"
-aboutFileName = "examples/bookAP/about.csv"
-shapesFileName = "examples/bookAP/shapes.csv"
+namespaceFileName = "namespaces.csv"
+aboutFileName = "about.csv"
+shapesFileName = "shapes.csv"
 outputFileName = None
 
 

@@ -16,7 +16,7 @@ usage: tap2shacl.py [-h] [-c <tap config file name>] [-ns <namespace csv file>]
                     [-a <tap metadata csv file>] [-s <shapes csv file>]
                     <tap csv file>
 
-example: ./tap2shacl.py examples/booksAP/tap.csv
+example: path/to/tap2shacl.py tap.csv
 
 ## Dependencies
 tap2shacl depends on several unstable packages that deal with reading and processing the application profile:
