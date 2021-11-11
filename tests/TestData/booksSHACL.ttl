@@ -10,48 +10,38 @@
     sh:class sdo:Book ;
     sh:description "Shape for describing books"@en ;
     sh:name "Book"@en ;
-    sh:property <#bookshapeAuthor_value>,
-        <#bookshapeISBN-13_count>,
-        <#bookshapeISBN-13_value>,
-        <#bookshapeTitle_count>,
-        <#bookshapeTitle_value> ;
+    sh:property <#bookshapeAuthor>,
+        <#bookshapeISBN-13>,
+        <#bookshapeTitle> ;
     sh:targetClass sdo:Book .
 
-<#authorshapeFamilyname_value> a sh:PropertyShape ;
+<#authorshapeFamilyname> a sh:PropertyShape ;
     sh:name "Family name"@en ;
     sh:path foaf:familyName ;
     sh:severity sh:Info .
 
-<#authorshapeGivenname_value> a sh:PropertyShape ;
+<#authorshapeGivenname> a sh:PropertyShape ;
     sh:datatype xsd:string ;
     sh:name "Given name"@en ;
     sh:nodeKind sh:Literal ;
     sh:path foaf:givenName ;
     sh:severity sh:Info .
 
-<#bookshapeAuthor_value> a sh:PropertyShape ;
+<#bookshapeAuthor> a sh:PropertyShape ;
     sh:name "Author"@en ;
     sh:node <#AuthorShape> ;
     sh:nodeKind sh:BlankNodeOrIRI ;
     sh:path dct:creator .
 
-<#bookshapeISBN-13_count> a sh:PropertyShape ;
+<#bookshapeISBN-13> a sh:PropertyShape ;
     sh:maxCount 1 ;
-    sh:path sdo:isbn ;
-    sh:severity sh:Violation .
-
-<#bookshapeISBN-13_value> a sh:PropertyShape ;
     sh:minLength 13 ;
     sh:name "ISBN-13"@en ;
     sh:nodeKind sh:Literal ;
     sh:path sdo:isbn .
 
-<#bookshapeTitle_count> a sh:PropertyShape ;
+<#bookshapeTitle> a sh:PropertyShape ;
     sh:maxCount 1 ;
-    sh:path dct:title ;
-    sh:severity sh:Violation .
-
-<#bookshapeTitle_value> a sh:PropertyShape ;
     sh:datatype rdf:langString ;
     sh:name "Title"@en ;
     sh:nodeKind sh:Literal ;
@@ -61,6 +51,6 @@
     sh:class foaf:Person ;
     sh:description "Shape for describing authors"@en ;
     sh:name "Author"@en ;
-    sh:property <#authorshapeFamilyname_value>,
-        <#authorshapeGivenname_value> ;
+    sh:property <#authorshapeFamilyname>,
+        <#authorshapeGivenname> ;
     sh:targetObjectsOf dct:creator .
