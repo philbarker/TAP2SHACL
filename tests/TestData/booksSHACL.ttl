@@ -49,6 +49,7 @@
     sh:class foaf:Person ;
     sh:description "Shape for describing authors"@en ;
     sh:name "Author"@en ;
+    sh:closed true ;
     sh:property <#authorshapeFamilyname>,
         <#authorshapeGivenname> ;
     sh:targetObjectsOf dct:creator .
