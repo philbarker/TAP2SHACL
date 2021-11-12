@@ -17,15 +17,13 @@
 
 <#authorshapeFamilyname> a sh:PropertyShape ;
     sh:name "Family name"@en ;
-    sh:path foaf:familyName ;
-    sh:severity sh:Info .
+    sh:path foaf:familyName .
 
 <#authorshapeGivenname> a sh:PropertyShape ;
     sh:datatype xsd:string ;
     sh:name "Given name"@en ;
     sh:nodeKind sh:Literal ;
-    sh:path foaf:givenName ;
-    sh:severity sh:Info .
+    sh:path foaf:givenName .
 
 <#bookshapeAuthor> a sh:PropertyShape ;
     sh:name "Author"@en ;
