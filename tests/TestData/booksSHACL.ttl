@@ -33,7 +33,7 @@
 
 <#bookshapeISBN-13> a sh:PropertyShape ;
     sh:maxCount 1 ;
-    sh:minLength 13 ;
+    sh:pattern "^(\\d{13})?$" ;
     sh:name "ISBN-13"@en ;
     sh:nodeKind sh:Literal ;
     sh:path sdo:isbn .
