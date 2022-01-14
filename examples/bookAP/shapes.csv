@@ -1,3 +1,0 @@
-shapeID,label,comment,target,targetType,mandatory,severity,Note
-#BookShape,Book,Shape for describing books,sdo:Book,class,TRUE,Violation,
-#AuthorShape,Author,Shape for describing authors,dct:creator,objectsof,FALSE,Warning,
