@@ -1,0 +1,7 @@
+@prefix ex: <http://example.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:Calvin
+	a ex:Person ;
+	ex:birthDate "1971-07-07"^^xsd:date ;  # not in closed shape
+	ex:worksFor ex:UntypedCompany .        # invalid type

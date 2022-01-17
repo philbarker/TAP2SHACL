@@ -1,0 +1,6 @@
+@prefix ex: <http://example.org/> .
+
+ex:Bob
+	a ex:Person ;
+	ex:ssn "123-45-6789" ;
+	ex:ssn "124-35-6789" .   # repeats not allowed

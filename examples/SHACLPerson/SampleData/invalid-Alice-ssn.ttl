@@ -1,0 +1,5 @@
+@prefix ex: <http://example.org/> .
+
+ex:Alice
+	a ex:Person ;
+	ex:ssn "987-65-432A" .    # malformed SSN

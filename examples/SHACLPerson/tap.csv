@@ -1,0 +1,4 @@
+shapeID,propertyID,propertyLabel,mandatory,repeatable,valueNodeType,valueDataType,valueConstraint,valueConstraintType,valueShape,note,severity
+PersonShape,ex:ssn,Social Security Number,FALSE,FALSE,Literal,xsd:string,^\d{3}-\d{2}-\d{4}$,pattern,,,
+,ex:worksFor,Employer,,,IRI,,,,CompanyShape,,
+CompanyShape,rdf:type,type,TRUE,TRUE,IRI,,ex:Company,,,,

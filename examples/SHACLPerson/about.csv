@@ -1,0 +1,7 @@
+url,tap.csv
+title,SHACL Person Shape
+description,Reproducing the Person example used in the SHACL W3C rec.
+author,Phil Barker
+date,2021-11-12
+lang,en
+based on,https://www.w3.org/TR/shacl/#shacl-example

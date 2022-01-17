@@ -1,0 +1,3 @@
+shapeID,label,comment,target,targetType,closed,ignoreProps,mandatory,severity,Note
+PersonShape,Person Shape,Node shape for person class,ex:Person,class,TRUE,rdf:type,TRUE,Violation,
+CompanyShape,Employer,Shape for employers,ex:woksFor,objectsof,FALSE,,FALSE,Violation,
