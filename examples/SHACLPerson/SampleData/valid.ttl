@@ -1,0 +1,8 @@
+@prefix ex: <http://example.org/> .
+
+ex:Alice
+	a ex:Person ;
+	ex:ssn "987-65-4320" ;
+  ex:worksFor ex:ACME .
+
+ex:ACME a ex:Company .
