@@ -31,13 +31,13 @@ def test_init(test_Converter):
 
 def test_convertTAP2AP(test_Converter):
     c = test_Converter
-    assert len(c.ap.propertyStatements) == 0
+    assert len(c.ap.statementTemplates) == 0
     assert len(c.ap.metadata) == 0
     assert len(c.ap.namespaces) == 0
     assert len(c.ap.shapeInfo) == 0
     ap = c.convertTAP2AP(namespaceFileName, aboutFileName, shapesFileName)
     assert ap == c.ap
-    assert len(ap.propertyStatements) == 7
+    assert len(ap.statementTemplates) == 7
     assert len(ap.metadata) == 6
     assert len(ap.namespaces) == 20
     assert len(ap.shapeInfo) == 2
