@@ -7,13 +7,22 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <#BookShape> a sh:NodeShape ;
-    sh:class sdo:Book ;
     sh:description "Shape for describing books"@en ;
     sh:name "Book"@en ;
     sh:property <#bookshapeAuthor>,
         <#bookshapeISBN-13>,
-        <#bookshapeTitle> ;
+        <#bookshapeTitle> ,
+        <#bookshapeType> ;
     sh:targetClass sdo:Book .
+
+<#AuthorShape> a sh:NodeShape ;
+    sh:description "Shape for describing authors"@en ;
+    sh:name "Author"@en ;
+    sh:closed true ;
+    sh:property <#authorshapeFamilyname>,
+        <#authorshapeGivenname> ,
+        <#authorshapeType> ;
+    sh:targetObjectsOf dct:creator .
 
 <#authorshapeFamilyname> a sh:PropertyShape ;
     sh:name "Family name"@en ;
@@ -24,6 +33,14 @@
     sh:name "Given name"@en ;
     sh:nodeKind sh:Literal ;
     sh:path foaf:givenName .
+
+<#authorshapeType> a sh:PropertyShape ;
+    sh:hasValue foaf:Person ;
+    sh:minCount 1 ;
+    sh:name "Type"@en ;
+    sh:nodeKind sh:IRI ;
+    sh:path rdf:type ;
+    sh:severity sh:Warning .
 
 <#bookshapeAuthor> a sh:PropertyShape ;
     sh:name "Author"@en ;
@@ -45,11 +62,11 @@
     sh:nodeKind sh:Literal ;
     sh:path dct:title  .
 
-<#AuthorShape> a sh:NodeShape ;
-    sh:class foaf:Person ;
-    sh:description "Shape for describing authors"@en ;
-    sh:name "Author"@en ;
-    sh:closed true ;
-    sh:property <#authorshapeFamilyname>,
-        <#authorshapeGivenname> ;
-    sh:targetObjectsOf dct:creator .
+<#bookshapeType> a sh:PropertyShape ;
+    sh:hasValue sdo:Book ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:name "Type"@en ;
+    sh:nodeKind sh:IRI ;
+    sh:path rdf:type ;
+    sh:severity sh:Warning .
