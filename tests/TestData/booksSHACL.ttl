@@ -22,7 +22,7 @@
     sh:property <#authorshapeFamilyname>,
         <#authorshapeGivenname> ,
         <#authorshapeType> ;
-    sh:targetObjectsOf dct:creator .
+    sh:targetObjectsOf dct:creator , dct:contributor.
 
 <#authorshapeFamilyname> a sh:PropertyShape ;
     sh:name "Family name"@en ;
