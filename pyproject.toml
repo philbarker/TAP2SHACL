@@ -12,26 +12,27 @@ classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
 ]
+license = { file = "LICENSE" }
 keywords = ["RDF", "metadata application profile", "SHACL"]
 dependencies = [
-    "rdflib >= 7.0.0"
-    "pyyaml == 6.0.1"
-    "https://github.com/philbarker/dctap-python/archive/refs/tags/1.0.0-alpha1-philb.zip"
-    "https://github.com/philbarker/APClasses/archive/refs/tags/v1.0-alpha.1.zip"
-    "https://github.com/philbarker/TAP2AP/archive/refs/tags/1.0.0-alpha.2.zip"
-    "https://github.com/philbarker/AP2SHACL/archive/refs/tags/v1.0.0-alpha.1.zip"
+    "rdflib >= 7.0.0",
+    "pyyaml == 6.0.1",
+    "dctap @ https://github.com/philbarker/dctap-python/archive/refs/tags/1.0.0-alpha1-philb.zip",
+    "AP @ https://github.com/philbarker/APClasses/archive/refs/tags/v1.0-alpha.1.zip",
+    "tap2ap @ https://github.com/philbarker/TAP2AP/archive/refs/tags/1.0.0-alpha.2.zip",
+    "ap2shacl @ https://github.com/philbarker/AP2SHACL/archive/refs/tags/v1.0.0-alpha.1.zip",
 ]
 requires-python = ">=3.9"
 
 [project.optional-dependencies]
 dev = [
-    "pytest >= 6.2"
-    "black >= 21.6b0"
-    "pytest-black >= 0.3.12"
+    "pytest >= 6.2",
+    "black >= 21.6b0",
+    "pytest-black >= 0.3.12",
 ]
 
 [project.urls]
 Homepage = "https://github.com/philbarker/TAP2SHACL/"
 
 [project.scripts]
-tap2shacl = "tap2shacl"
+tap2shacl = "tap2shacl:__main__"
