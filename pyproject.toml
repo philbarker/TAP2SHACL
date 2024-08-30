@@ -35,4 +35,4 @@ dev = [
 Homepage = "https://github.com/philbarker/TAP2SHACL/"
 
 [project.scripts]
-tap2shacl = "tap2shacl:__main__"
+tap2shacl = "tap2shacl.__main__:main"
