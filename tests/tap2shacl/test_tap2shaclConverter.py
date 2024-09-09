@@ -3,12 +3,12 @@ from tap2shacl import TAP2SHACLConverter, TAP2APConverter, AP2SHACLConverter
 from rdflib import Graph, URIRef
 import pprint
 
-tapFileName = "tests/TestData/booksTAP.csv"
-configFileName = "tests/TestData/dctap.yml"
-namespaceFileName = "tests/TestData/booksTAP-namespaces.csv"
-aboutFileName = "tests/TestData/booksTAP-about.csv"
-shapesFileName = "tests/TestData/booksTAP-shapes.csv"
-shaclFileName = "tests/TestData/booksSHACL.ttl"
+tapFileName = "tests/tap2shacl/TestData/booksTAP.csv"
+configFileName = "tests/tap2shacl/TestData/dctap.yml"
+namespaceFileName = "tests/tap2shacl/TestData/booksTAP-namespaces.csv"
+aboutFileName = "tests/tap2shacl/TestData/booksTAP-about.csv"
+shapesFileName = "tests/tap2shacl/TestData/booksTAP-shapes.csv"
+shaclFileName = "tests/tap2shacl/TestData/booksSHACL.ttl"
 
 
 @pytest.fixture(scope="module")
