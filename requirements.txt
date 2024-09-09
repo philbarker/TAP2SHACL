@@ -1,6 +1,4 @@
-rdflib
+rdflib >= 6.0.0
 pyyaml == 6.0.1
+py-getch
 https://github.com/philbarker/dctap-python/archive/refs/tags/1.0.0-alpha1-philb.zip
-https://github.com/philbarker/APClasses/archive/refs/tags/v1.0-alpha.1.zip
-https://github.com/philbarker/TAP2AP/archive/refs/tags/1.0.0-alpha.2.zip
-https://github.com/philbarker/AP2SHACL/archive/refs/tags/v1.0.0-alpha.1.zip

@@ -1,0 +1,136 @@
+{'shapes': [{
+        'shapeID': '#CredentialOrganization',
+        'statement_constraints': [{
+            'propertyID': 'rdf:type',
+            'propertyLabel': 'member of class',
+            'mandatory': 'true',
+            'repeatable': 'false',
+            'valueNodeType': 'iri',
+            'valueConstraint': 'ceterms:CredentialOrganization'
+        },{
+            'propertyID': 'ceterms:name',
+            'propertyLabel': 'Name',
+            'mandatory': 'true',
+            'repeatable': 'false',
+            'valueNodeType': 'literal',
+            'valueDataType': 'rdf:langString'
+        },{
+            'propertyID': 'ceterms:description',
+            'propertyLabel': 'Description',
+            'mandatory': 'true',
+            'repeatable': 'false',
+            'valueNodeType': 'literal',
+            'valueDataType': 'rdf:langString',
+            'valueConstraint': '10',
+            'valueConstraintType': 'minlength'
+        },{
+            'propertyID': 'ceterms:subjectWebpage',
+            'propertyLabel': 'Subject Webpage',
+            'mandatory': 'true',
+            'repeatable': 'false',
+            'valueNodeType': 'iri'
+        },{
+            'propertyID':'ceterms:address ceterms:email',
+            'propertyLabel': 'Contact',
+            'mandatory': 'true',
+            'repeatable': 'true'
+        },{
+            'propertyID': 'ceterms:email',
+            'propertyLabel': 'Email address',
+            'mandatory': 'false',
+            'repeatable': 'true',
+            'valueNodeType': 'literal',
+            'valueDataType': 'xsd:string',
+            'valueConstraint': '/.+@.+/',
+            'valueConstraintType': 'pattern'
+        },{
+            'propertyID': 'ceterms:address',
+            'propertyLabel': 'Postal address',
+            'mandatory': 'false',
+            'repeatable': 'true',
+            'valueNodeType': 'iri bnode',
+            'valueShape': '#Address'
+        },{
+            'propertyID': 'ceterms:agentType',
+            'propertyLabel': 'Agent type',
+            'mandatory': 'true',
+            'repeatable': 'true',
+            'valueNodeType': 'bnode',
+            'valueShape': '#AgentTypeAlignment'
+        },{
+            'propertyID': 'ceterms:agentSectorType',
+            'propertyLabel': 'Agent Sector Type',
+            'mandatory': 'true',
+            'repeatable': 'true',
+            'valueNodeType': 'bnode',
+            'valueShape': '#AgentSectorTypeAlignment'
+        },{
+            'propertyID': 'ceterms:ctid',
+            'propertyLabel': 'CTID',
+            'mandatory': 'true',
+            'repeatable': 'false',
+            'valueNodeType': 'literal',
+            'valueDataType': 'xsd:string',
+            'valueConstraint': '/ce-[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}/',
+            'valueConstraintType': 'pattern'
+        }]
+    },{
+        'shapeID': '#Address',
+        'statement_constraints': [{
+            'propertyID': 'rdf:type',
+            'propertyLabel': 'member of class',
+            'mandatory': 'true',
+            'repeatable': 'true',
+            'valueNodeType': 'iri',
+            'valueConstraint': 'ceterms:Address'
+        }]
+    },{
+        'shapeID': '#AgentTypeAlignment',
+        'statement_constraints': [{
+            'propertyID': 'rdf:type',
+            'propertyLabel': 'member of class',
+            'mandatory': 'true',
+            'repeatable': 'false',
+            'valueNodeType': 'iri',
+            'valueConstraint': 'ceterms:CredentialAlignmentObject'
+        },{
+            'propertyID': 'ceterms:framework',
+            'propertyLabel': 'framework',
+            'mandatory': 'true',
+            'repeatable': 'false',
+            'valueNodeType': 'iri',
+            'valueConstraint': 'ceterms:OrganizationType'
+        },{
+            'propertyID': 'ceterms:targetNode',
+            'propertyLabel': 'target node',
+            'mandatory': 'true',
+            'repeatable': 'true',
+            'valueNodeType': 'iri',
+            'valueConstraint': 'orgType:AssessmentBody\norgType:Business\norgType:BusinessAssociation\norgType:CertificationBody\norgType:Collaborative\norgType:CoordinatingBody\norgType:FourYear\norgType:Government\norgType:HighSchool\norgType:LaborUnion\norgType:Magnet\norgType:Military\norgType:NonTraditional\norgType:Postsecondary\norgType:PrimarilyOnline\norgType:ProfessionalAssociation\norgType:QualityAssurance\norgType:SecondarySchool\norgType:Technical\norgType:TrainingProvider\norgType:TwoYear\norgType:Vendor '
+        }]
+    },{
+        'shapeID': '#AgentSectorTypeAlignment',
+        'statement_constraints': [{
+            'propertyID': 'rdf:type',
+            'propertyLabel': 'member of class',
+            'mandatory': 'true',
+            'repeatable': 'false',
+            'valueNodeType': 'iri',
+            'valueConstraint': 'ceterms:CredentialAlignmentObject'
+        },{
+            'propertyID': 'ceterms:framework',
+            'propertyLabel': 'framework',
+            'mandatory': 'true',
+            'repeatable': 'false',
+            'valueNodeType': 'iri',
+            'valueConstraint': 'ceterms:AgentSector'
+        },{
+            'propertyID': 'ceterms:targetNode',
+            'propertyLabel': 'agent sector target node',
+            'mandatory': 'true',
+            'repeatable': 'false',
+            'valueNodeType': 'iri',
+            'valueConstraint': 'agentSector:PrivateForProfit\nagentSector:Public\nagentSector:PrivateNonProfit '
+        }]
+    }]
+}

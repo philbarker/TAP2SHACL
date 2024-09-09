@@ -1,0 +1,91 @@
+=== Metadata ===
+{ 'author': 'Phil Barker',
+  'date': '2021-03-26',
+  'description': 'Tabular Application Profile expressing required and '
+                 'recommended properties for Credential Organizations in CE '
+                 'Registry. Based on CE Registry Minimum Data Policy by way of '
+                 'SHACL. ',
+  'title': 'Credential Engine Registry profle of CTDL for Credential '
+           'Organizations',
+  'url': 'tap.csv'}
+
+
+=== Namespaces ===
+{ '_': 'http://example.org/',
+  'agentSector': 'https://purl.org/ctdl/vocabs/agentSector/',
+  'ceterms': 'https://purl.org/ctdl/terms/',
+  'dc': 'http://purl.org/dc/elements/1.1/',
+  'dct': 'http://purl.org/dc/terms/',
+  'dcterms': 'http://purl.org/dc/terms/',
+  'foaf': 'http://xmlns.com/foaf/0.1/',
+  'orgType': 'https://purl.org/ctdl/vocabs/orgType/',
+  'orgtype': 'https://purl.org/ctdl/vocabs/orgType/',
+  'owl': 'http://www.w3.org/2002/07/owl#',
+  'rdf': 'http://www.w3.org/1999/02/22-rdf-syntax-ns#',
+  'rdfs': 'http://www.w3.org/2000/01/rdf-schema#',
+  'schema': 'http://schema.org/',
+  'sh': 'http://www.w3.org/ns/shacl#',
+  'skos': 'http://www.w3.org/2004/02/skos/core#',
+  'skosxl': 'http://www.w3.org/2008/05/skos-xl#',
+  'wdt': 'http://www.wikidata.org/prop/direct/',
+  'xsd': 'http://www.w3.org/2001/XMLSchema#'}
+
+
+=== Shapes ===
+{ '#Address': {'label': 'Address'},
+  '#AgentSectorTypeAlignment': { 'Note': '',
+                                 'comment': 'Validates Alignment Objects used '
+                                            'for agentSectorType in Credential '
+                                            'Organization instances',
+                                 'label': 'Agent Sector Type Alignment Object '
+                                          'Shape',
+                                 'mandatory': 'TRUE',
+                                 'severity': 'Violation',
+                                 'target': 'ceterms:agentSectorType',
+                                 'targetType': 'ObjectsOf'},
+  '#AgentTypeAlignment': { 'Note': '',
+                           'comment': 'Validates Alignment Objects used for '
+                                      'agentType in Credential Organization '
+                                      'instances',
+                           'label': 'Agent Type Alignment Object Shape',
+                           'mandatory': 'TRUE',
+                           'severity': 'Violation',
+                           'target': 'ceterms:agentType',
+                           'targetType': 'ObjectsOf'},
+  '#Contact': {'label': 'Contact'},
+  '#CredentialOrganization': { 'Note': '',
+                               'comment': 'Shape to validate Credential '
+                                          'Organization instances',
+                               'label': 'Credential Organization Shape',
+                               'mandatory': 'TRUE',
+                               'severity': 'Violation',
+                               'target': 'ceterms:CredentialOrganization',
+                               'targetType': 'Class'},
+  '#nodePresent': { 'Note': 'Not sure how to do this',
+                    'comment': 'Shape to check there is a Credential '
+                               'Organization instance',
+                    'label': 'Existence check',
+                    'mandatory': 'TRUE',
+                    'severity': '',
+                    'target': 'ceterms:CredentialOrganization',
+                    'targetType': 'Class'}}
+
+
+=== statementTemplates ===
+[ StatementTemplate(shapes=['#CredentialOrganization'], properties=['rdf:type'], labels={'en': 'member of class'}, mandatory=True, repeatable=False, valueNodeTypes=['iri'], valueDataTypes=[], valueShapes=[], valueConstraints=['ceterms:CredentialOrganization'], valueConstraintType='', notes={}, severity='Violation'),
+  StatementTemplate(shapes=['#CredentialOrganization'], properties=['ceterms:name'], labels={'en': 'Name'}, mandatory=True, repeatable=False, valueNodeTypes=['literal'], valueDataTypes=['rdf:langString'], valueShapes=[], valueConstraints=[], valueConstraintType='', notes={}, severity='Violation'),
+  StatementTemplate(shapes=['#CredentialOrganization'], properties=['ceterms:description'], labels={'en': 'Description'}, mandatory=True, repeatable=False, valueNodeTypes=['literal'], valueDataTypes=['rdf:langString'], valueShapes=[], valueConstraints=['10'], valueConstraintType='minlength', notes={}, severity='Violation'),
+  StatementTemplate(shapes=['#CredentialOrganization'], properties=['ceterms:subjectWebpage'], labels={'en': 'Subject Webpage'}, mandatory=True, repeatable=False, valueNodeTypes=['iri'], valueDataTypes=[], valueShapes=[], valueConstraints=[], valueConstraintType='', notes={}, severity='Violation'),
+  StatementTemplate(shapes=['#CredentialOrganization'], properties=['ceterms:address', 'ceterms:email'], labels={'en': 'Contact'}, mandatory=True, repeatable=True, valueNodeTypes=[], valueDataTypes=[], valueShapes=[], valueConstraints=[], valueConstraintType='', notes={}, severity='Violation'),
+  StatementTemplate(shapes=['#CredentialOrganization'], properties=['ceterms:email'], labels={'en': 'Email address'}, mandatory=False, repeatable=True, valueNodeTypes=['literal'], valueDataTypes=['xsd:string'], valueShapes=[], valueConstraints=['/.+@.+/'], valueConstraintType='pattern', notes={}, severity='Violation'),
+  StatementTemplate(shapes=['#CredentialOrganization'], properties=['ceterms:address'], labels={'en': 'Postal address'}, mandatory=False, repeatable=True, valueNodeTypes=['iri', 'bnode'], valueDataTypes=[], valueShapes=['#Address'], valueConstraints=[], valueConstraintType='', notes={}, severity='Violation'),
+  StatementTemplate(shapes=['#CredentialOrganization'], properties=['ceterms:agentType'], labels={'en': 'Agent type'}, mandatory=True, repeatable=True, valueNodeTypes=['bnode'], valueDataTypes=[], valueShapes=['#AgentTypeAlignment'], valueConstraints=[], valueConstraintType='', notes={}, severity='Violation'),
+  StatementTemplate(shapes=['#CredentialOrganization'], properties=['ceterms:agentSectorType'], labels={'en': 'Agent Sector Type'}, mandatory=True, repeatable=True, valueNodeTypes=['bnode'], valueDataTypes=[], valueShapes=['#AgentSectorTypeAlignment'], valueConstraints=[], valueConstraintType='', notes={}, severity='Violation'),
+  StatementTemplate(shapes=['#CredentialOrganization'], properties=['ceterms:ctid'], labels={'en': 'CTID'}, mandatory=True, repeatable=False, valueNodeTypes=['literal'], valueDataTypes=['xsd:string'], valueShapes=[], valueConstraints=['/ce-[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}/'], valueConstraintType='pattern', notes={}, severity='Violation'),
+  StatementTemplate(shapes=['#Address'], properties=['rdf:type'], labels={'en': 'member of class'}, mandatory=True, repeatable=True, valueNodeTypes=['iri'], valueDataTypes=[], valueShapes=[], valueConstraints=['ceterms:Address'], valueConstraintType='', notes={}, severity='Violation'),
+  StatementTemplate(shapes=['#AgentTypeAlignment'], properties=['rdf:type'], labels={'en': 'member of class'}, mandatory=True, repeatable=False, valueNodeTypes=['iri'], valueDataTypes=[], valueShapes=[], valueConstraints=['ceterms:CredentialAlignmentObject'], valueConstraintType='', notes={}, severity='Violation'),
+  StatementTemplate(shapes=['#AgentTypeAlignment'], properties=['ceterms:framework'], labels={'en': 'framework'}, mandatory=True, repeatable=False, valueNodeTypes=['iri'], valueDataTypes=[], valueShapes=[], valueConstraints=['ceterms:OrganizationType'], valueConstraintType='', notes={}, severity='Violation'),
+  StatementTemplate(shapes=['#AgentTypeAlignment'], properties=['ceterms:targetNode'], labels={'en': 'target node'}, mandatory=True, repeatable=True, valueNodeTypes=['iri'], valueDataTypes=[], valueShapes=[], valueConstraints=['orgType:AssessmentBody', 'orgType:Business', 'orgType:BusinessAssociation', 'orgType:CertificationBody', 'orgType:Collaborative', 'orgType:CoordinatingBody', 'orgType:FourYear', 'orgType:Government', 'orgType:HighSchool', 'orgType:LaborUnion', 'orgType:Magnet', 'orgType:Military', 'orgType:NonTraditional', 'orgType:Postsecondary', 'orgType:PrimarilyOnline', 'orgType:ProfessionalAssociation', 'orgType:QualityAssurance', 'orgType:SecondarySchool', 'orgType:Technical', 'orgType:TrainingProvider', 'orgType:TwoYear', 'orgType:Vendor', ''], valueConstraintType='', notes={}, severity='Violation'),
+  StatementTemplate(shapes=['#AgentSectorTypeAlignment'], properties=['rdf:type'], labels={'en': 'member of class'}, mandatory=True, repeatable=False, valueNodeTypes=['iri'], valueDataTypes=[], valueShapes=[], valueConstraints=['ceterms:CredentialAlignmentObject'], valueConstraintType='', notes={}, severity='Violation'),
+  StatementTemplate(shapes=['#AgentSectorTypeAlignment'], properties=['ceterms:framework'], labels={'en': 'framework'}, mandatory=True, repeatable=False, valueNodeTypes=['iri'], valueDataTypes=[], valueShapes=[], valueConstraints=['ceterms:AgentSector'], valueConstraintType='', notes={}, severity='Violation'),
+  StatementTemplate(shapes=['#AgentSectorTypeAlignment'], properties=['ceterms:targetNode'], labels={'en': 'agent sector target node'}, mandatory=True, repeatable=False, valueNodeTypes=['iri'], valueDataTypes=[], valueShapes=[], valueConstraints=['agentSector:PrivateForProfit', 'agentSector:Public', 'agentSector:PrivateNonProfit', ''], valueConstraintType='', notes={}, severity='Violation')]
