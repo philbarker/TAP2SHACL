@@ -5,7 +5,7 @@ from dctap.config import get_config
 from ap import AP, StatementTemplate
 
 tapFileName = "tests/tap2ap/TestData/tap.csv"
-configFileName = "tests/tap2ap/TestData/dctap.yml"
+configFileName = "dctap.yml"
 namespaceFileName = "tests/tap2ap/TestData/namespaces.csv"
 aboutFileName = "tests/tap2ap/TestData/about.csv"
 shapesFileName = "tests/tap2ap/TestData/shapes.csv"

@@ -4,7 +4,7 @@ from rdflib import Graph, URIRef
 import pprint
 
 tapFileName = "tests/tap2shacl/TestData/booksTAP.csv"
-configFileName = "tests/tap2shacl/TestData/dctap.yml"
+configFileName = "dctap.yml"
 namespaceFileName = "tests/tap2shacl/TestData/booksTAP-namespaces.csv"
 aboutFileName = "tests/tap2shacl/TestData/booksTAP-about.csv"
 shapesFileName = "tests/tap2shacl/TestData/booksTAP-shapes.csv"
