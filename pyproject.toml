@@ -4,13 +4,17 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tap2shacl"
-version = "1.0.0-beta.1"
+version = "1.0.0-beta.2"
 description = "DC TAP to SHACL converter."
 readme = "README.MD"
 authors = [{name = "Phil Barker", email="phil.barker@pjjk.co.uk"}]
 classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Natural Language :: English",
 ]
 license = { file = "LICENSE" }
 keywords = ["RDF", "metadata application profile", "SHACL"]
@@ -18,7 +22,7 @@ dependencies = [
     "rdflib >= 7.0.0",
     "pyyaml >= 6.0.1",
     "click>=7.1.2",
-    "pygetch>=1.0.0"
+    "pygetch>=0.1.0"
 ]
 requires-python = ">=3.9"
 

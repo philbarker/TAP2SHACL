@@ -4,7 +4,9 @@ WARNING: beta version, use at own risk.
 
 ## Installation and use
 
-Always install in a virtual environment (venv). Has several unstable dependencies (see below).
+Always install in a virtual environment (venv).
+
+`pip install tap2shacl` or install from github. 
 
 ```
 (venv) $ git clone https://github.com/philbarker/TAP2SHACL
@@ -18,8 +20,8 @@ usage: tap2shacl.py [-h] [-c <tap config file name>] [-ns <namespace csv file>]
 
 example: path/to/tap2shacl.py tap.csv
 
-## Dependencies
-tap2shacl used on several packages that deal with reading and processing the application profile:
+## Contents
+tap2shacl includes several modules that deal with reading and processing the application profile:
 
 * **APClasses** Provides python data classes for metadata application profiles, with methods to populate them.
 * **dctap-python** Reads and carries out basic validation of a DCTAP instance. (This is a frozen version of [dctap-python](https://github.com/dcmi/dctap-python/))
