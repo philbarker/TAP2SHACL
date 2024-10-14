@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tap2shacl"
-version = "1.0.0-beta.1"
+version = "1.0.0-beta.2"
 description = "DC TAP to SHACL converter."
 readme = "README.MD"
 authors = [{name = "Phil Barker", email="phil.barker@pjjk.co.uk"}]
@@ -22,7 +22,8 @@ dependencies = [
     "rdflib >=7.0.0",
     "pyyaml >=6.0.1",
     "click >=7.1.2",
-    "pygetch >=0.1.0"
+    "pygetch >=0.1.0",
+    "dctap == 0.4.5"
 ]
 requires-python = ">=3.9"
 

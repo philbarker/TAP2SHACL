@@ -12,13 +12,14 @@ shapesFileName = "tests/tap2ap/TestData/shapes.csv"
 
 
 def test_loadTAP():
-    config_dict = get_config(configFileName)
+    config_dict = get_config(nondefault_configfile_name=configFileName)
     with open(tapFileName, "r") as csv_fileObj:
-        csvreader_output = csvreader(csv_fileObj, config_dict)
-    tapshapes_dict, warnings_dict = csvreader_output
+        csvreader_output = csvreader(open_csvfile_obj=csv_fileObj, config_dict=config_dict)
+    tapshapes_dict = csvreader_output
+    warnings_dict = csvreader_output["warnings"]
     assert len(warnings_dict) == 2
     assert "shapes" in tapshapes_dict.keys()
-#    print(tapshapes_dict)
+    print(tapshapes_dict)
     assert len(tapshapes_dict["shapes"]) == 2
     assert tapshapes_dict["shapes"][0]["shapeID"] == "BookShape"
     assert tapshapes_dict["shapes"][1]["shapeID"] == "AuthorShape"
