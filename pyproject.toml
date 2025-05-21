@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "tap2shacl"
-version = "1.0.0-beta.2"
+version = "1.0.0-beta.3"
 description = "DC TAP to SHACL converter."
 readme = "README.MD"
 authors = [{name = "Phil Barker", email="phil.barker@pjjk.co.uk"}]
@@ -32,6 +32,7 @@ dev = [
     "pytest >= 6.2",
     "black >= 21.6b0",
     "pytest-black >= 0.3.12",
+    "pyinstaller >= 5.4"
 ]
 
 [project.urls]
