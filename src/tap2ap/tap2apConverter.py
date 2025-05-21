@@ -29,9 +29,11 @@ class TAP2APConverter:
 
     def load_tap(self, tap_fname, config_fname):
         """Load TAP data from file."""
-        self.tap["config_dict"] = get_config(nondefault_configfile_name = config_fname)
+        self.tap["config_dict"] = get_config(nondefault_configfile_name=config_fname)
         with open(tap_fname, "r") as csv_fileObj:
-            csvreader_output = csvreader( open_csvfile_obj=csv_fileObj, config_dict=self.tap["config_dict"])
+            csvreader_output = csvreader(
+                open_csvfile_obj=csv_fileObj, config_dict=self.tap["config_dict"]
+            )
             self.tap["shapes_dict"] = csvreader_output
             self.tap["warnings_dict"] = csvreader_output["warnings"]
 
@@ -230,7 +232,7 @@ class TAP2APConverter:
                         self.ap.add_namespace(prefix[:-1], prefixes[prefix])
                     else:
                         self.ap.add_namespace(prefix, prefixes[prefix])
-                else: # no prefix
+                else:  # no prefix
                     self.ap.add_namespace("default", prefixes[prefix])
         elif source == "csv":
             self.ap.load_namespaces(fname)
