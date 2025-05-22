@@ -243,6 +243,7 @@ def address_ps():
     ps.add_valueNodeType("iri")
     ps.add_valueNodeType("BNode")
     ps.add_valueShape("#Address")
+    ps.add_valueShape("#Person")
     ps.add_severity("Warning")
     expected_triples.extend(
         [
@@ -251,10 +252,11 @@ def address_ps():
             (BASE.personAddress, SH.path, SDO.address),
             (BASE.personAddress, SH.name, Literal("Address", lang="en")),
             (BASE.personAddress, SH.nodeKind, SH.BlankNodeOrIRI),
-            (BASE.personAddress, SH.node, BASE.Address),
+            #            (BASE.personAddress, SH.node, BASE.Address),
             (BASE.personAddress, SH.severity, SH.Warning),
         ]
     )
+    expected_ttl.append("sh:or ( [ sh:node <Address> ] [ sh:node <Person> ] ) ;")
     return ps
 
 
@@ -340,7 +342,10 @@ def address_shapeInfo():
     shapeInfo = ShapeInfo(
         label={"en": "Address shape"},
         comment={"en": "A shape for tests"},
-        targets={"ObjectsOf": ["schema:address", "schema:location"], "class": ["schema:PostalAddress"]},
+        targets={
+            "ObjectsOf": ["schema:address", "schema:location"],
+            "class": ["schema:PostalAddress"],
+        },
         mandatory=False,
         ignoreProps=[],
         severity="Warning",
@@ -351,7 +356,7 @@ def address_shapeInfo():
             (BASE.Address, SH.name, Literal("Address shape", lang="en")),
             (BASE.Address, SH.description, Literal("A shape for tests", lang="en")),
             (BASE.Address, SH.targetObjectsOf, SDO.address),
-            (BASE.Address, SH.targetObjectsOf, SDO.location)
+            (BASE.Address, SH.targetObjectsOf, SDO.location),
         ]
     )
     return shapeInfo

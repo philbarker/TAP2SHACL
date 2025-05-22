@@ -285,14 +285,37 @@ class AP2SHACLConverter:
                 else:  # no value constraints to add
                     pass
                 if ps.valueShapes != []:
-                    for shape in ps.valueShapes:
-                        self.sg.add(
-                            (ps_uri, SH.node, str2URIRef(self.ap.namespaces, shape))
-                        )
+                    (shProp, val) = self.convert_valueShapes(ps.valueShapes)
+                    self.sg.add((ps_uri, shProp, val))
                 if ps.mandatory:
                     self.sg.add((ps_uri, SH.minCount, Literal(1)))
                 if not ps.repeatable:
                     self.sg.add((ps_uri, SH.maxCount, Literal(1)))
+
+    def convert_valueShapes(self, shapes):
+        """Adds statements about sh:node values to add to shapes graph."""
+        # see also convert valueDataTypes
+        # if you find yourself copying this structure again, generalize it
+        if type(shapes) is not list:
+            msg = "Value shapes must be in a list."
+            raise TypeError(msg)
+        elif len(shapes) == 0:
+            msg = "No value shapes to convert."
+            raise ValueError(msg)
+        elif len(shapes) == 1:
+            p = SH.node
+            v = str2URIRef(self.ap.namespaces, shapes[0])
+            return (p, v)
+        else:
+            bnode_list = list()
+            for shape in shapes:
+                bnode = BNode()
+                shapeURI = str2URIRef(self.ap.namespaces, shape)
+                self.sg.add((bnode, SH.node, shapeURI))
+                bnode_list.append(bnode)
+            p = SH_or
+            v = list2RDFList(self.sg, bnode_list, "bnode", self.ap.namespaces)
+            return (p, v)
 
     def convert_severity(self, severity):
         """Return SHACL value for severity based on string."""
@@ -311,7 +334,10 @@ class AP2SHACLConverter:
     def convert_valueDataTypes(self, dataTypes):
         """Retrun a duple of shacl property and value for data type constraints.
 
-        If there is a single data type, the shacl property is sh:datatype and the value is the xsd:datatype; if there are more than one datatypes, the shacl property is sh:or and the value is the first node in a list of BNodes each with predicate sh:datatype and object xsd:datatype."""
+        If there is a single data type, the shacl property is sh:datatype and the value is the xsd:datatype; if there are more than one datatypes, the shacl property is sh:or and the value is the first node in a list of BNodes each with predicate sh:datatype and object xsd:datatype.
+        """
+        # see also convert valueShapes
+        # if you find yourself copying this structure again, generalize it
         if type(dataTypes) is not list:
             msg = "Data types must be in a list."
             raise TypeError(msg)

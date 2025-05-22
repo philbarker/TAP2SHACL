@@ -14,7 +14,9 @@ shapesFileName = "tests/tap2ap/TestData/shapes.csv"
 def test_loadTAP():
     config_dict = get_config(nondefault_configfile_name=configFileName)
     with open(tapFileName, "r") as csv_fileObj:
-        csvreader_output = csvreader(open_csvfile_obj=csv_fileObj, config_dict=config_dict)
+        csvreader_output = csvreader(
+            open_csvfile_obj=csv_fileObj, config_dict=config_dict
+        )
     tapshapes_dict = csvreader_output
     warnings_dict = csvreader_output["warnings"]
     assert len(warnings_dict) == 2
@@ -25,7 +27,7 @@ def test_loadTAP():
     assert tapshapes_dict["shapes"][1]["shapeID"] == "AuthorShape"
     assert len(tapshapes_dict["shapes"][0]["statement_templates"]) == 4
     assert len(tapshapes_dict["shapes"][1]["statement_templates"]) == 3
-    sh0Constraints =  tapshapes_dict["shapes"][0]["statement_templates"]
+    sh0Constraints = tapshapes_dict["shapes"][0]["statement_templates"]
     sh1Constraints = tapshapes_dict["shapes"][1]["statement_templates"]
     assert sh0Constraints[0]["propertyID"] == "dct:title"
     assert sh0Constraints[1]["propertyID"] == "dct:creator"

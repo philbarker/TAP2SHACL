@@ -47,11 +47,15 @@ def test_convert_namespaces(test_Converter):
     print(c.ap.namespaces)
     assert c.ap.namespaces["default"] == "http://example.org/terms#"
 
+
 def test_load_AP_metadata(test_Converter):
     c = test_Converter
     assert c.ap.metadata == {}
     c.load_AP_Metadata(aboutFileName)
-    assert c.ap.metadata["url"] == "https://docs.google.com/spreadsheets/d/1Vr_x1ckpxG0v8oq7FGB2Qea8G3ESPFvUWK89H0wJH9w/edit#gid=424305041"
+    assert (
+        c.ap.metadata["url"]
+        == "https://docs.google.com/spreadsheets/d/1Vr_x1ckpxG0v8oq7FGB2Qea8G3ESPFvUWK89H0wJH9w/edit#gid=424305041"
+    )
     assert c.ap.metadata["title"] == "Simple book AP"
     assert c.ap.metadata["description"] == "Simple DC TAP for books"
     assert c.ap.metadata["author"] == "Phil Barker"
@@ -69,7 +73,10 @@ def test_load_shapeInfo(test_Converter):
     author_shapeInfo = c.ap.shapeInfo["AuthorShape"]
     assert book_shapeInfo.label == {"en": "Book"}
     assert author_shapeInfo.label == {"en": "Author"}
-    assert author_shapeInfo.targets == {"objectsof": ["dct:creator"], "class": ["sdo:Person"]}
+    assert author_shapeInfo.targets == {
+        "objectsof": ["dct:creator"],
+        "class": ["sdo:Person"],
+    }
     assert author_shapeInfo.closed == True
     assert author_shapeInfo.ignoreProps == ["rdf:type"]
     assert author_shapeInfo.mandatory == False
@@ -199,18 +206,25 @@ orgType:Business"""
     assert "orgType:Government" in ps.valueConstraints
     assert "orgType:HEI" in ps.valueConstraints
     vC = 2
-    with pytest.raises(TypeError) as e:
-        c.convert_valueConstraints(vC, ps)
-    assert str(e.value) == "Value for constraints must be a string or a list."
-    vC = [2]
-    with pytest.raises(TypeError) as e:
-        c.convert_valueConstraints(vC, ps)
-    assert str(e.value) == "Value for constraint must be a string."
-    vC = "\." # testing how escape chars are handled
     c.convert_valueConstraints(vC, ps)
-    print(ps.valueConstraints) # stored as \\.
+    assert "2" in ps.valueConstraints
+    #    vC = [3, 4]
+    #    c.convert_valueConstraints(vC, ps)
+    #    assert "3" in ps.valueConstraints
+    #    assert "4" in ps.valueConstraints
+    vC = 2.0
+    with pytest.raises(TypeError) as e:
+        c.convert_valueConstraints(vC, ps)
+    assert str(e.value) == "Value for constraints must be a string, integer or a list."
+    vC = [2.0]
+    with pytest.raises(TypeError) as e:
+        c.convert_valueConstraints(vC, ps)
+    assert str(e.value) == "Value for constraint must be a string or integer."
+    vC = "\."  # testing how escape chars are handled
+    c.convert_valueConstraints(vC, ps)
+    print(ps.valueConstraints)  # stored as \\.
     assert "\." in ps.valueConstraints  # passes
-    assert "\\." in ps.valueConstraints # also passes
+    assert "\\." in ps.valueConstraints  # also passes
 
 
 def test_convert_valueConstraintType(test_Converter):
@@ -229,8 +243,8 @@ def test_convert_shapes(test_Converter):
     c = test_Converter
     ps = StatementTemplate()
     shapes = "AddressShape,ContactShape"
-    addressShapeInfo = ShapeInfo(label= "Address")
-    contactShapeInfo = ShapeInfo(label= "Contact")
+    addressShapeInfo = ShapeInfo(label="Address")
+    contactShapeInfo = ShapeInfo(label="Contact")
     c.ap.add_shapeInfo("AddressShape", addressShapeInfo)
     c.ap.add_shapeInfo("ContactShape", contactShapeInfo)
     c.convert_valueShapes(shapes, ps)

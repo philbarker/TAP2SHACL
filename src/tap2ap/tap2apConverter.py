@@ -29,9 +29,11 @@ class TAP2APConverter:
 
     def load_tap(self, tap_fname, config_fname):
         """Load TAP data from file."""
-        self.tap["config_dict"] = get_config(nondefault_configfile_name = config_fname)
+        self.tap["config_dict"] = get_config(nondefault_configfile_name=config_fname)
         with open(tap_fname, "r") as csv_fileObj:
-            csvreader_output = csvreader( open_csvfile_obj=csv_fileObj, config_dict=self.tap["config_dict"])
+            csvreader_output = csvreader(
+                open_csvfile_obj=csv_fileObj, config_dict=self.tap["config_dict"]
+            )
             self.tap["shapes_dict"] = csvreader_output
             self.tap["warnings_dict"] = csvreader_output["warnings"]
 
@@ -156,21 +158,29 @@ class TAP2APConverter:
             raise TypeError(msg)
 
     def convert_valueConstraints(self, constraints, ps):
-        """Convert a string of constraints into separate items and add them as values of the `valueConstraints` property of statementTemplate."""
+        """Convert a constraint or list of constraints into separate items and add them as values of the `valueConstraints` property of statementTemplate."""
+        # To do: dctap is now providing integer values for some constraints, cludgy patch included, but need to check details of what dctap is doing.
         if type(constraints) is str:
             for constraint in re.split(constraint_splitters, constraints):
                 ps.add_valueConstraint(constraint)
+        elif type(constraints) is int:
+            constraint = str(constraints)
+            ps.add_valueConstraint(constraint)
         elif type(constraints) is list:
-            for constraint in constraints:
-                if type(constraint) is str:
+            for list_item in constraints:
+                if type(list_item) is str:
+                    for constraint in re.split(constraint_splitters, list_item):
+                        ps.add_valueConstraint(constraint)
+                elif type(list_item) is int:
+                    constraint = str(list_item)
                     ps.add_valueConstraint(constraint)
                 else:
-                    print(constraint)
-                    msg = "Value for constraint must be a string."
+                    print(list_item)
+                    msg = "Value for constraint must be a string or integer."
                     raise TypeError(msg)
         else:
             print(constraints)
-            msg = "Value for constraints must be a string or a list."
+            msg = "Value for constraints must be a string, integer or a list."
             raise TypeError(msg)
 
     def convert_valueConstraintType(self, constrTypeStr, ps):
@@ -230,7 +240,7 @@ class TAP2APConverter:
                         self.ap.add_namespace(prefix[:-1], prefixes[prefix])
                     else:
                         self.ap.add_namespace(prefix, prefixes[prefix])
-                else: # no prefix
+                else:  # no prefix
                     self.ap.add_namespace("default", prefixes[prefix])
         elif source == "csv":
             self.ap.load_namespaces(fname)
