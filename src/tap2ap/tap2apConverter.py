@@ -158,21 +158,28 @@ class TAP2APConverter:
             raise TypeError(msg)
 
     def convert_valueConstraints(self, constraints, ps):
-        """Convert a string of constraints into separate items and add them as values of the `valueConstraints` property of statementTemplate."""
-        if type(constraints) is str:
+        """Convert a constraint or list of constraints into separate items and add them as values of the `valueConstraints` property of statementTemplate."""
+        # To do: dctap is now providing integer values for some constraints, cludgy patch included, but need to check details of what dctap is doing.
+        if isinstance(constraints, str):
             for constraint in re.split(constraint_splitters, constraints):
                 ps.add_valueConstraint(constraint)
+        elif isinstance(constraints, int):
+            constraint = str(constraints)
+            ps.add_valueConstraint(constraint)
         elif type(constraints) is list:
             for constraint in constraints:
-                if type(constraint) is str:
+                if isinstance(constraint, str):
+                    ps.add_valueConstraint(constraint)
+                elif isinstance(constraint, int):
+                    constraint = str(constraint)
                     ps.add_valueConstraint(constraint)
                 else:
                     print(constraint)
-                    msg = "Value for constraint must be a string."
+                    msg = "Value for constraint must be a string or integer."
                     raise TypeError(msg)
         else:
             print(constraints)
-            msg = "Value for constraints must be a string or a list."
+            msg = "Value for constraints must be a string, integer or a list."
             raise TypeError(msg)
 
     def convert_valueConstraintType(self, constrTypeStr, ps):
