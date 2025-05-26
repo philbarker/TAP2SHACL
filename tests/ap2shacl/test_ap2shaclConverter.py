@@ -327,8 +327,8 @@ def person_shapeInfo():
     expected_triples.extend(
         [
             (BASE.Person, RDF.type, SH.NodeShape),
-            (BASE.Person, SH.name, Literal("Person shape", lang="en")),
-            (BASE.Person, SH.description, Literal("A shape for tests", lang="en")),
+            (BASE.Person, RDFS.label, Literal("Person shape", lang="en")),
+            (BASE.Person, RDFS.comment, Literal("A shape for tests", lang="en")),
             (BASE.Person, SH.targetClass, schema.Person),
             (BASE.Person, SH.closed, Literal("True", datatype=XSD.boolean)),
         ]
@@ -353,8 +353,8 @@ def address_shapeInfo():
     expected_triples.extend(
         [
             (BASE.Address, RDF.type, SH.NodeShape),
-            (BASE.Address, SH.name, Literal("Address shape", lang="en")),
-            (BASE.Address, SH.description, Literal("A shape for tests", lang="en")),
+            (BASE.Address, RDFS.label, Literal("Address shape", lang="en")),
+            (BASE.Address, RDFS.comment, Literal("A shape for tests", lang="en")),
             (BASE.Address, SH.targetObjectsOf, SDO.address),
             (BASE.Address, SH.targetObjectsOf, SDO.location),
         ]
