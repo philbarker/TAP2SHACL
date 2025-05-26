@@ -54,7 +54,8 @@
     sh:pattern "^(\\d{13})?$" ;
     sh:name "ISBN-13"@en ;
     sh:nodeKind sh:Literal ;
-    sh:path sdo:isbn .
+    sh:path sdo:isbn ;
+    rdfs:comment "Just the 13 numbers, no spaces or separators."@en .
 
 <#bookshapeTitle> a sh:PropertyShape ;
     sh:maxCount 1 ;

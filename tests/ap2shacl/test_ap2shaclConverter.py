@@ -41,6 +41,7 @@ def name_ps():
     ps.add_mandatory(True)
     ps.add_repeatable(True)
     ps.add_severity("Violation")
+    ps.add_note("en", "Use for personal names")
     expected_triples.extend(
         [
             (BASE.Person, SH.property, BASE.personName),
@@ -51,6 +52,11 @@ def name_ps():
             (BASE.personName, SH.minLength, Literal(2)),
             (BASE.personName, SH.minCount, Literal(1)),
             (BASE.personName, SH.severity, SH.Violation),
+            (
+                BASE.personName,
+                RDFS.comment,
+                Literal("Use for personal names", lang="en"),
+            ),
         ]
     )
     expected_ttl.append(

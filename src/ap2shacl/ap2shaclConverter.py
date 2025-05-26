@@ -265,6 +265,9 @@ class AP2SHACLConverter:
                 for lang in ps.labels:
                     name = Literal(ps.labels[lang], lang=lang)
                     self.sg.add((ps_uri, SH.name, name))
+                for lang in ps.notes:
+                    note = Literal(ps.notes[lang], lang=lang)
+                    self.sg.add((ps_uri, RDFS.comment, note))
                 for property in ps.properties:
                     path = str2URIRef(self.ap.namespaces, property)
                     self.sg.add((ps_uri, SH.path, path))
