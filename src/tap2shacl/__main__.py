@@ -1,5 +1,10 @@
 #!/usr/bin/env python
-from tap2shacl import TAP2SHACLConverter, TAP2APConverter, AP2SHACLConverter
+from tap2shacl import (
+    TAP2SHACLConverter,
+    TAP2APConverter,
+    AP2SHACLConverter,
+    __version__,
+)
 from tap2shacl.parseArguments import parse_arguments
 
 
@@ -15,4 +20,5 @@ def main():
 
 
 if __name__ == "__main__":
+    print(__version__)
     main()

@@ -2,9 +2,12 @@
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools.dynamic]
+version = {attr = "tap2shacl._version.__version__"}
+
 [project]
 name = "tap2shacl"
-version = "1.0.0b5"
+dynamic = ["version"]
 description = "DC TAP to SHACL converter."
 readme = "README.md"
 authors = [{name = "Phil Barker", email="phil.barker@pjjk.co.uk"}]
