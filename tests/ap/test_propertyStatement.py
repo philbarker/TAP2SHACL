@@ -183,6 +183,36 @@ def test_add_severity(test_PS):
     assert ps.severity == "Violation"
 
 
+def test_add_propertyDescription(test_PS):
+    ps = test_PS
+    assert ps.propertyDescriptions == {}
+    ps.add_propertyDescription("en", "Type of resource.")
+    assert ps.propertyDescriptions["en"] == "Type of resource."
+    ps.add_propertyDescription("es", "Tipo de recurso.")
+    assert ps.propertyDescriptions["en"] == "Type of resource."
+    assert ps.propertyDescriptions["es"] == "Tipo de recurso."
+    with pytest.raises(TypeError) as e:
+        ps.add_propertyDescription({"en": "type"})
+    assert (
+        str(e.value)[:60]
+        == "StatementTemplate.add_propertyDescription() missing 1 requir"
+    )
+    with pytest.raises(TypeError) as e:
+        ps.add_propertyDescription("en", 2)
+    assert (
+        str(e.value) == "Language identifier and property description must be strings."
+    )
+    with pytest.raises(TypeError) as e:
+        ps.add_propertyDescription(
+            ["en", "es"], ["TType of resource.", "Tipo de recurso."]
+        )
+    assert (
+        str(e.value) == "Language identifier and property description must be strings."
+    )
+    assert ps.propertyDescriptions["en"] == "Type of resource."
+    assert ps.propertyDescriptions["es"] == "Tipo de recurso."
+
+
 def test_result(test_PS):
     # integration test sum of all above
     ps = test_PS
@@ -200,4 +230,6 @@ def test_result(test_PS):
     assert ps.notes["en"] == "This is the type."
     assert ps.notes["es"] == "Este es el tipo."
     assert ps.severity == "Violation"
+    assert ps.propertyDescriptions["en"] == "Type of resource."
+    assert ps.propertyDescriptions["es"] == "Tipo de recurso."
     # which doesn't make much sense, but it is what we entered

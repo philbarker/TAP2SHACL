@@ -172,12 +172,12 @@ class AP2SHACLConverter:
                 for key in shapeInfo[shape].label.keys():
                     value = shapeInfo[shape].label[key]
                     label = Literal(value, lang=key)
-                self.sg.add((shape_uri, SH.name, label))
+                self.sg.add((shape_uri, RDFS.label, label))
             if shapeInfo[shape].comment:
                 for key in shapeInfo[shape].comment.keys():
                     value = shapeInfo[shape].comment[key]
                     comment = Literal(value, lang=key)
-                    self.sg.add((shape_uri, SH.description, comment))
+                    self.sg.add((shape_uri, RDFS.comment, comment))
             if shapeInfo[shape].targets:
                 self._covertTargets(shapeInfo[shape].targets, shape_uri)
             if shapeInfo[shape].closed == True:
@@ -265,6 +265,12 @@ class AP2SHACLConverter:
                 for lang in ps.labels:
                     name = Literal(ps.labels[lang], lang=lang)
                     self.sg.add((ps_uri, SH.name, name))
+                for lang in ps.notes:
+                    note = Literal(ps.notes[lang], lang=lang)
+                    self.sg.add((ps_uri, RDFS.comment, note))
+                for lang in ps.propertyDescriptions:
+                    descr = Literal(ps.propertyDescriptions[lang], lang=lang)
+                    self.sg.add((ps_uri, SH.description, descr))
                 for property in ps.properties:
                     path = str2URIRef(self.ap.namespaces, property)
                     self.sg.add((ps_uri, SH.path, path))

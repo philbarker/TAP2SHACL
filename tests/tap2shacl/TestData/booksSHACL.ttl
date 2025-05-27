@@ -2,22 +2,24 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sdo: <https://schema.org/> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <#BookShape> a sh:NodeShape ;
-    sh:description "Shape for describing books"@en ;
-    sh:name "Book"@en ;
+    rdfs:comment "Shape for describing books"@en ;
+    rdfs:label "Book"@en ;
     sh:property <#bookshapeAuthor>,
         <#bookshapeISBN-13>,
         <#bookshapeTitle> ,
         <#bookshapeType> ;
+    sh:closed false ;
     sh:targetClass sdo:Book .
 
 <#AuthorShape> a sh:NodeShape ;
-    sh:description "Shape for describing authors"@en ;
-    sh:name "Author"@en ;
+    rdfs:comment "Shape for describing authors"@en ;
+    rdfs:label "Author"@en ;
     sh:closed true ;
     sh:property <#authorshapeFamilyname>,
         <#authorshapeGivenname> ,
@@ -25,6 +27,8 @@
     sh:targetObjectsOf dct:creator , dct:contributor.
 
 <#authorshapeFamilyname> a sh:PropertyShape ;
+    sh:nodeKind sh:Literal ;
+    sh:datatype xsd:string ;
     sh:name "Family name"@en ;
     sh:path foaf:familyName .
 
@@ -46,21 +50,30 @@
     sh:name "Author"@en ;
     sh:node <#AuthorShape> ;
     sh:nodeKind sh:BlankNodeOrIRI ;
-    sh:path dct:creator .
+    sh:path dct:creator ;
+    sh:description "Author of the book."@en ;
+    sh:severity sh:Warning .
+
 
 <#bookshapeISBN-13> a sh:PropertyShape ;
+    sh:datatype xsd:string ;
     sh:maxCount 1 ;
     sh:pattern "^(\\d{13})?$" ;
     sh:name "ISBN-13"@en ;
     sh:nodeKind sh:Literal ;
-    sh:path sdo:isbn .
+    sh:path sdo:isbn ;
+    sh:severity sh:Violation ;
+    rdfs:comment "Just the 13 numbers, no spaces or separators."@en .
 
 <#bookshapeTitle> a sh:PropertyShape ;
     sh:maxCount 1 ;
+    sh:minCount 1 ;
     sh:datatype rdf:langString ;
     sh:name "Title"@en ;
+    sh:description "Title of the book."@en ;
     sh:nodeKind sh:Literal ;
-    sh:path dct:title  .
+    sh:path dct:title  ;
+    sh:severity sh:Violation .
 
 <#bookshapeType> a sh:PropertyShape ;
     sh:hasValue sdo:Book ;

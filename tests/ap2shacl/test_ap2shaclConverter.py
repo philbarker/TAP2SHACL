@@ -41,6 +41,8 @@ def name_ps():
     ps.add_mandatory(True)
     ps.add_repeatable(True)
     ps.add_severity("Violation")
+    ps.add_note("en", "Use for personal names.")
+    ps.add_propertyDescription("en", "A person's name.")
     expected_triples.extend(
         [
             (BASE.Person, SH.property, BASE.personName),
@@ -51,6 +53,16 @@ def name_ps():
             (BASE.personName, SH.minLength, Literal(2)),
             (BASE.personName, SH.minCount, Literal(1)),
             (BASE.personName, SH.severity, SH.Violation),
+            (
+                BASE.personName,
+                RDFS.comment,
+                Literal("Use for personal names.", lang="en"),
+            ),
+            (
+                BASE.personName,
+                SH.description,
+                Literal("A person's name.", lang="en"),
+            ),
         ]
     )
     expected_ttl.append(
@@ -327,8 +339,8 @@ def person_shapeInfo():
     expected_triples.extend(
         [
             (BASE.Person, RDF.type, SH.NodeShape),
-            (BASE.Person, SH.name, Literal("Person shape", lang="en")),
-            (BASE.Person, SH.description, Literal("A shape for tests", lang="en")),
+            (BASE.Person, RDFS.label, Literal("Person shape", lang="en")),
+            (BASE.Person, RDFS.comment, Literal("A shape for tests", lang="en")),
             (BASE.Person, SH.targetClass, schema.Person),
             (BASE.Person, SH.closed, Literal("True", datatype=XSD.boolean)),
         ]
@@ -353,8 +365,8 @@ def address_shapeInfo():
     expected_triples.extend(
         [
             (BASE.Address, RDF.type, SH.NodeShape),
-            (BASE.Address, SH.name, Literal("Address shape", lang="en")),
-            (BASE.Address, SH.description, Literal("A shape for tests", lang="en")),
+            (BASE.Address, RDFS.label, Literal("Address shape", lang="en")),
+            (BASE.Address, RDFS.comment, Literal("A shape for tests", lang="en")),
             (BASE.Address, SH.targetObjectsOf, SDO.address),
             (BASE.Address, SH.targetObjectsOf, SDO.location),
         ]

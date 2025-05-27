@@ -17,6 +17,7 @@ class StatementTemplate:
     valueConstraintType: str = ""
     notes: dict = field(default_factory=dict)
     severity: str = ""
+    propertyDescriptions: dict = field(default_factory=dict)
 
     def add_property(self, propertyID):
         """Append propertyID to class properties list"""
@@ -132,4 +133,12 @@ class StatementTemplate:
             self.severity = s
         else:
             msg = "Severity value must be a string."
+            raise TypeError(msg)
+
+    def add_propertyDescription(self, lang, desc):
+        """Append {lang: desc} to propertyDescription dict."""
+        if (type(lang) == str) and (type(desc) == str):
+            self.propertyDescriptions[lang] = desc
+        else:
+            msg = "Language identifier and property description must be strings."
             raise TypeError(msg)

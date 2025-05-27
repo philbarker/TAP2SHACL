@@ -272,6 +272,18 @@ def test_convert_notes(test_Converter):
     assert str(e.value) == "Notes must be passed in a string."
 
 
+def test_convert_propertyDescriptions(test_Converter):
+    c = test_Converter
+    ps = StatementTemplate()
+    descr = "test one"
+    c.convert_propertyDescriptions(descr, ps)
+    assert ps.propertyDescriptions == {"en": "test one"}
+    descr = 42
+    with pytest.raises(TypeError) as e:
+        c.convert_propertyDescriptions(descr, ps)
+    assert str(e.value) == "Property descriptions must be passed in a string."
+
+
 def test_convert_severity(test_Converter):
     c = test_Converter
     ps = StatementTemplate()
