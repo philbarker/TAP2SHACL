@@ -49,6 +49,10 @@ def test_convertTAP2SHACL(test_Converter):
     expected_sg = Graph().parse(shaclFileName)
     c.convertAP2SHACL()
     for stmt in expected_sg:
-        if stmt not in expected_sg:
+        if stmt not in c.sg:
             print(stmt)
         assert stmt in c.sg
+    for stmt in c.sg:
+        if stmt not in expected_sg:
+            print(stmt)
+        assert stmt in expected_sg
