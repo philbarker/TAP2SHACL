@@ -41,7 +41,8 @@ def name_ps():
     ps.add_mandatory(True)
     ps.add_repeatable(True)
     ps.add_severity("Violation")
-    ps.add_note("en", "Use for personal names")
+    ps.add_note("en", "Use for personal names.")
+    ps.add_propertyDescription("en", "A person's name.")
     expected_triples.extend(
         [
             (BASE.Person, SH.property, BASE.personName),
@@ -55,7 +56,12 @@ def name_ps():
             (
                 BASE.personName,
                 RDFS.comment,
-                Literal("Use for personal names", lang="en"),
+                Literal("Use for personal names.", lang="en"),
+            ),
+            (
+                BASE.personName,
+                SH.description,
+                Literal("A person's name.", lang="en"),
             ),
         ]
     )

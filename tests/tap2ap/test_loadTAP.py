@@ -30,6 +30,9 @@ def test_loadTAP():
     sh0Constraints = tapshapes_dict["shapes"][0]["statement_templates"]
     sh1Constraints = tapshapes_dict["shapes"][1]["statement_templates"]
     assert sh0Constraints[0]["propertyID"] == "dct:title"
+    assert sh0Constraints[0]["propertyLabel"] == "Title"
+    assert sh0Constraints[0]["note"] == "In English."
+    assert sh0Constraints[0]["propertyDescription"] == "Title of the book."
     assert sh0Constraints[1]["propertyID"] == "dct:creator"
     assert sh0Constraints[2]["propertyID"] == "sdo:isbn"
     assert sh0Constraints[3]["propertyID"] == "rdf:type"

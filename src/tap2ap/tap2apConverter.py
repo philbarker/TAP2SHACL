@@ -71,6 +71,8 @@ class TAP2APConverter:
                     self.convert_notes(sc["note"], ps)
                 if "severity" in sc.keys():
                     self.convert_severity(sc["severity"], ps)
+                if "propertyDescription" in sc.keys():
+                    self.convert_propertyDescriptions(sc["propertyDescription"], ps)
                 self.ap.add_statementTemplate(ps)
 
     def check_shapeID(self, sh_id):
@@ -101,6 +103,7 @@ class TAP2APConverter:
     def convert_labels(self, label, ps):
         """Take string as label and add it to a statementTemplate."""
         # TODO: multiple labels, different languages
+        # TODO: general convertString method for propertyDescription, note and labels
         try:
             lang = self.ap.metadata["language"]
         except (KeyError, ValueError):
@@ -205,6 +208,7 @@ class TAP2APConverter:
     def convert_notes(self, noteStr, ps):
         """Take string as note and add it to a statementTemplate."""
         # TODO: multiple notes, different languages
+        # TODO: general convertString method for propertyDescription, note and labels
         lang_keys = ["lang", "language", "dc:language", "dct:language"]
         if "lang" in self.ap.metadata.keys():
             lang = self.ap.metadata["lang"]
@@ -220,6 +224,26 @@ class TAP2APConverter:
             ps.add_note(lang, noteStr)
         else:
             msg = "Notes must be passed in a string."
+            raise TypeError(msg)
+
+    def convert_propertyDescriptions(self, descStr, ps):
+        """Take string as note and add it to a statementTemplate."""
+        # TODO: multiple notes, different languages
+        # TODO: general convertString method for propertyDescription, note and labels
+        if "lang" in self.ap.metadata.keys():
+            lang = self.ap.metadata["lang"]
+        elif "language" in self.ap.metadata.keys():
+            lang = self.ap.metadata["language"]
+        elif "dc:language" in self.ap.metadata.keys():
+            lang = self.ap.metadata["dc:language"]
+        elif "dct:language" in self.ap.metadata.keys():
+            lang = self.ap.metadata["dct:language"]
+        else:
+            lang = default_language
+        if type(descStr) == str:
+            ps.add_propertyDescription(lang, descStr)
+        else:
+            msg = "Property descriptions must be passed in a string."
             raise TypeError(msg)
 
     def convert_severity(self, severityStr, ps):

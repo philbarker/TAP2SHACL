@@ -14,6 +14,7 @@
         <#bookshapeISBN-13>,
         <#bookshapeTitle> ,
         <#bookshapeType> ;
+    sh:closed false ;
     sh:targetClass sdo:Book .
 
 <#AuthorShape> a sh:NodeShape ;
@@ -26,6 +27,8 @@
     sh:targetObjectsOf dct:creator , dct:contributor.
 
 <#authorshapeFamilyname> a sh:PropertyShape ;
+    sh:nodeKind sh:Literal ;
+    sh:datatype xsd:string ;
     sh:name "Family name"@en ;
     sh:path foaf:familyName .
 
@@ -47,22 +50,30 @@
     sh:name "Author"@en ;
     sh:node <#AuthorShape> ;
     sh:nodeKind sh:BlankNodeOrIRI ;
-    sh:path dct:creator .
+    sh:path dct:creator ;
+    sh:description "Author of the book."@en ;
+    sh:severity sh:Warning .
+
 
 <#bookshapeISBN-13> a sh:PropertyShape ;
+    sh:datatype xsd:string ;
     sh:maxCount 1 ;
     sh:pattern "^(\\d{13})?$" ;
     sh:name "ISBN-13"@en ;
     sh:nodeKind sh:Literal ;
     sh:path sdo:isbn ;
+    sh:severity sh:Violation ;
     rdfs:comment "Just the 13 numbers, no spaces or separators."@en .
 
 <#bookshapeTitle> a sh:PropertyShape ;
     sh:maxCount 1 ;
+    sh:minCount 1 ;
     sh:datatype rdf:langString ;
     sh:name "Title"@en ;
+    sh:description "Title of the book."@en ;
     sh:nodeKind sh:Literal ;
-    sh:path dct:title  .
+    sh:path dct:title  ;
+    sh:severity sh:Violation .
 
 <#bookshapeType> a sh:PropertyShape ;
     sh:hasValue sdo:Book ;
