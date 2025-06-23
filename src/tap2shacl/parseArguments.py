@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from tap2shacl import __version__
+from ._version import __version__
 
 # defaults
 tapFileName = "tap.csv"
@@ -45,8 +45,8 @@ def parse_arguments():
         default=shapesFileName,
     )
     parser.add_argument(
-        "-o",
-        "--outputFileName",
+        "outputFileName",
+        nargs="?",
         type=str,
         metavar="<output file>",
         default=outputFileName,

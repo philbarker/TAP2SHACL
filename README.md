@@ -14,11 +14,26 @@ Always install in a virtual environment (venv).
 (venv) $ pip install -r requirements.txt
 (venv) $ ./tap2shacl.py --help
 ```
-usage: `tap2shacl.py [-h] [-c «tap config file name»] [-ns «namespace csv file»]
-                    [-a «tap metadata csv file»] [-s «shapes csv file»]
-                    «tap csv file»`
+**usage:** `tap2shacl.py [-h] [-c «tap config file name»] [-ns «namespace csv file»]
+                    [-a «tap metadata csv file»] [-s «shapes csv file»] -v
+                    «tap csv file» [<output file>]`
 
-example: `path/to/tap2shacl.py tap.csv`
+example: `path/to/tap2shacl.py tap.csv shacl.ttl`
+
+```
+positional arguments:
+  <tap csv file>
+  <output file> (optional)
+options
+  -h, --help            show this help message and exit
+  -c <tap config file name>, --configFileName <tap config file name>
+  -ns <namespace csv file>, --namespaceFileName <namespace csv file>
+  -a <tap metadata csv file>, --aboutFileName <tap metadata csv file>
+  -s <shapes csv file>, --shapesFileName <shapes csv file>
+  -v, --version         show program's version number and exit
+```
+
+If no output file is specified the output is written to the terminal.
 
 ## Contents
 tap2shacl includes several modules that deal with reading and processing the application profile:
