@@ -10,6 +10,7 @@
 <#BookShape> a sh:NodeShape ;
     rdfs:comment "Shape for describing books"@en ;
     rdfs:label "Book"@en ;
+    sh:severity sh:Violation ;
     sh:property <#bookshapeAuthor>,
         <#bookshapeISBN-13>,
         <#bookshapeTitle> ,
@@ -21,6 +22,7 @@
     rdfs:comment "Shape for describing authors"@en ;
     rdfs:label "Author"@en ;
     sh:closed true ;
+    sh:severity sh:Warning ;
     sh:property <#authorshapeFamilyname>,
         <#authorshapeGivenname> ,
         <#authorshapeType> ;

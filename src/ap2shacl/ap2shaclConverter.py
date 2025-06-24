@@ -180,6 +180,11 @@ class AP2SHACLConverter:
                     self.sg.add((shape_uri, RDFS.comment, comment))
             if shapeInfo[shape].targets:
                 self._covertTargets(shapeInfo[shape].targets, shape_uri)
+            if shapeInfo[shape].severity:
+                severity = self.convert_severity(shapeInfo[shape].severity)
+                self.sg.add (
+                    (shape_uri, SH.severity, severity)
+                )
             if shapeInfo[shape].closed == True:
                 self.sg.add(
                     (shape_uri, SH.closed, Literal("True", datatype=XSD.boolean))
