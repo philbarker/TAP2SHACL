@@ -342,6 +342,7 @@ def person_shapeInfo():
             (BASE.Person, RDFS.label, Literal("Person shape", lang="en")),
             (BASE.Person, RDFS.comment, Literal("A shape for tests", lang="en")),
             (BASE.Person, SH.targetClass, schema.Person),
+            (BASE.Person, SH.severity, SH.Warning),
             (BASE.Person, SH.closed, Literal("True", datatype=XSD.boolean)),
         ]
     )
@@ -369,6 +370,7 @@ def address_shapeInfo():
             (BASE.Address, RDFS.comment, Literal("A shape for tests", lang="en")),
             (BASE.Address, SH.targetObjectsOf, SDO.address),
             (BASE.Address, SH.targetObjectsOf, SDO.location),
+            (BASE.Person, SH.severity, SH.Warning),
         ]
     )
     return shapeInfo

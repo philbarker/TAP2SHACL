@@ -1,7 +1,7 @@
 shapeID,propertyID,propertyLabel,mandatory,repeatable,valueNodeType,valueDataType,valueConstraint,valueConstraintType,valueShape,note,severity,propertyDescription
 BookShape,dct:title,Title,TRUE,FALSE,Literal,rdf:langString,,,,,Violation,"Title of the book."
 BookShape,dct:creator,Author,FALSE,TRUE,IRI BNODE,,,,AuthorShape,,Warning,"Author of the book."
-BookShape,sdo:isbn,ISBN-13,FALSE,FALSE,Literal,xsd:string,^(\\d{13})?$,pattern,,"Just checks for 13 digits.",Violation,"ISBN13, with no spaces"
+BookShape,sdo:isbn,ISBN-13,FALSE,FALSE,Literal,xsd:string,^(\d{13})?$,pattern,,"Just checks for 13 digits.",Violation,"ISBN13, with no spaces"
 BookShape,rdf:type,Type,TRUE,FALSE,IRI,,sdo:Book,,,,Warning
 AuthorShape,rdf:type,Type,TRUE,TRUE,IRI,,foaf:Person,,,,Warning
 AuthorShape,foaf:givenName,Given name,FALSE,TRUE,Literal,xsd:string,,,,,

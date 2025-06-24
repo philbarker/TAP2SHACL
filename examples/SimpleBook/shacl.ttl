@@ -16,6 +16,7 @@
         <bookshapeISBN-13>,
         <bookshapeTitle>,
         <bookshapeType> ;
+    sh:severity sh:Violation ;
     sh:targetClass sdo:Book .
 
 <AuthorShape> a sh:NodeShape ;
@@ -25,6 +26,7 @@
     sh:property <authorshapeFamilyname>,
         <authorshapeGivenname>,
         <authorshapeType> ;
+    sh:severity sh:Warning ;
     sh:targetObjectsOf dct:creator .
 
 <authorshapeFamilyname> a sh:PropertyShape ;
@@ -61,7 +63,7 @@
     sh:name "ISBN-13"@en-US ;
     sh:nodeKind sh:Literal ;
     sh:path sdo:isbn ;
-    sh:pattern "^(\\\\d{13})?$" ;
+    sh:pattern "^(\\d{13})?$" ;
     sh:severity sh:Violation .
 
 <bookshapeTitle> a sh:PropertyShape ;
