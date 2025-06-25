@@ -144,10 +144,10 @@ class StatementTemplate:
             msg = "Language identifier and property description must be strings."
             raise TypeError(msg)
 
-    def add_message(self, lang, note):
-        """Append {lang: note} to notes dict."""
-        if (type(lang) == str) and (type(note) == str):
-            self.messages[lang] = note
+    def add_message(self, lang, message):
+        """Append {lang: note} to messages dict."""
+        if (type(lang) == str) and (type(message) == str):
+            self.messages[lang] = message
         else:
             msg = "Language identifier and message must be strings."
             raise TypeError(msg)

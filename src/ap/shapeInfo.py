@@ -42,6 +42,8 @@ def read_shapeInfoDict(fname, lang):
                     s.set_severity(row["severity"])
                 if ("note" in row.keys()) and row["note"]:
                     s.add_note(lang, row["note"])
+                if ("message" in row.keys()) and row["message"]:
+                    s.add_message(lang, row["message"])
                 shapeInfoDict[id] = s
             else:  # skip lines with no shape id
                 continue
@@ -60,6 +62,7 @@ class ShapeInfo:
     ignoreProps: list = field(default_factory=list)
     mandatory: bool = False
     severity: str = ""
+    messages: dict = field(default_factory=dict)
     note: dict = field(default_factory=dict)
 
     def set_id(self, id):
@@ -147,7 +150,6 @@ class ShapeInfo:
 
     def set_severity(self, severity):
         """Append {target_type: target} to targets dict."""
-        # FIXME: need list of targets for each type.
         known_vals = ["warning", "info", "violation", ""]
         if type(severity) == str:
             if severity.lower() in known_vals:
@@ -167,4 +169,12 @@ class ShapeInfo:
             self.note[lang] = note
         else:
             msg = "Language identifier and note must be strings."
+            raise TypeError(msg)
+
+    def add_message(self, lang, message):
+        """Append {lang: note} to messages dict."""
+        if (type(lang) == str) and (type(message) == str):
+            self.messages[lang] = message
+        else:
+            msg = "Language identifier and message must be strings."
             raise TypeError(msg)
