@@ -143,6 +143,36 @@ def test_add_note(test_ShapeInfo: ShapeInfo):
     sh.add_note("en", "A Probe")
     assert sh.note == {"en": "A Probe", "es": "Una Prueba"}
 
+def test_add_message(test_ShapeInfo: ShapeInfo):
+    sh = test_ShapeInfo
+    assert sh.message == {}
+    sh.add_message("en", "Something is wrong.")
+    assert sh.message["en"] == "Something is wrong."
+    sh.add_message("es", "Algo es incorrecto.")
+    assert sh.message["en"] == "Something is wrong."
+    assert sh.message["es"] == "Algo es incorrecto."
+    with pytest.raises(TypeError) as e:
+        sh.add_message({"en": "type"})
+    assert (
+        str(e.value)[:60]
+        == "ShapeInfo.add_message() missing 1 required positional argume"
+    )
+    with pytest.raises(TypeError) as e:
+        sh.add_message("en", 2)
+    assert (
+        str(e.value) == "Language identifier and message must be strings."
+    )
+    with pytest.raises(TypeError) as e:
+        sh.add_message(
+            ["en", "es"], ["TType of resource.", "Tipo de recurso."]
+        )
+    assert (
+        str(e.value) == "Language identifier and message must be strings."
+    )
+    assert sh.message["en"] == "Something is wrong."
+    assert sh.message["es"] == "Algo es incorrecto."
+
+
 
 def test_read_shapeInfoDict():
     fname = "tests/ap/TestData/shapes.csv"
@@ -160,6 +190,7 @@ def test_read_shapeInfoDict():
             mandatory=True,
             severity="violation",
             note={},
+            message={"en": "Error in Book data."}
         ),
         "AuthorShape": ShapeInfo(
             id="AuthorShape",

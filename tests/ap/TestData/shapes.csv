@@ -1,4 +1,4 @@
-shapeID,label,comment,target,targetType,closed,ignoreProps,mandatory,severity,note
-BookShape,Book,Shape for describing books,"sdo:Book, ow:Work",class,,,TRUE,Violation,
+shapeID,label,comment,target,targetType,closed,ignoreProps,mandatory,severity,message,note
+BookShape,Book,Shape for describing books,"sdo:Book, ow:Work",class,,,TRUE,Violation,"Error in Book data.",
 AuthorShape,Author,Shape for describing authors,dct:creator,objectsof,TRUE,rdf:type,FALSE,Warning,
 AuthorShape,,,sdo:Person,class,,,,,

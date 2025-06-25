@@ -295,6 +295,16 @@ def test_convert_severity(test_Converter):
         c.convert_severity(sev, ps)
     assert str(e.value) == "Value for severity must be a string."
 
+def test_convert_message(test_Converter):
+    c = test_Converter
+    ps = StatementTemplate()
+    message = "test one"
+    c.convert_message(message, ps)
+    assert ps.message == {"en": "test one"}
+    message = 42
+    with pytest.raises(TypeError) as e:
+        c.convert_message(message, ps)
+    assert str(e.value) == "message must be passed in a string."
 
 def test_convert_TAP_AP(test_Converter):
     c = test_Converter

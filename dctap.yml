@@ -62,6 +62,7 @@ prefixes:
 extra_statement_template_elements:
  - severity
  - propertyDescription
+ - message
 
 # - "min"
 # - "max"
