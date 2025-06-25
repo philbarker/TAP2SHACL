@@ -199,6 +199,11 @@ class AP2SHACLConverter:
                     self.sg, properties, "CURIE", self.ap.namespaces
                 )
                 self.sg.add((shape_uri, SH.ignoredProperties, ignore_list))
+            if shapeInfo[shape].messages:
+                for key in shapeInfo[shape].messages.keys():
+                    value = shapeInfo[shape].messages[key]
+                    message = Literal(value, lang=key)
+                self.sg.add((shape_uri, SH.message, message))
 
     def _covertTargets(self, targets, shape_uri):
         for key in targets.keys():
@@ -223,7 +228,7 @@ class AP2SHACLConverter:
         # TODO: untangle this : there must be repeats that can be factored out
         # TODO: consider if alterntves in sh.or could be special cases like type
         for ps in self.ap.statementTemplates:
-            if len(ps.properties) > 1:
+            if len(ps.properties) > 1:   # Unusual case of alternative property paths 
                 print(
                     "# Warning: property template with multiple properties is not fully supported."
                 )
@@ -258,7 +263,7 @@ class AP2SHACLConverter:
             #                        type_uri = str2URIRef(self.ap.namespaces, vc)
             #                        self.sg.add((shape_uri, SH_class, type_uri))
             #                continue
-            else:
+            else:          # Normal case of just one property path
                 ps_name = make_property_shape_name(ps)
                 severity = self.convert_severity(ps.severity)
                 ps_uri = str2URIRef(self.ap.namespaces, ps_name)
@@ -279,6 +284,9 @@ class AP2SHACLConverter:
                 for property in ps.properties:
                     path = str2URIRef(self.ap.namespaces, property)
                     self.sg.add((ps_uri, SH.path, path))
+                for lang in ps.messages:
+                    message = Literal(ps.messages[lang], lang=lang)
+                    self.sg.add((ps_uri, SH.message, message))
                 if severity:
                     self.sg.add(((ps_uri, SH.severity, severity)))
                 if ps.valueNodeTypes != []:

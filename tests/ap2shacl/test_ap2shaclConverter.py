@@ -43,6 +43,7 @@ def name_ps():
     ps.add_severity("Violation")
     ps.add_note("en", "Use for personal names.")
     ps.add_propertyDescription("en", "A person's name.")
+    ps.add_message("en", "Error in person name data.")
     expected_triples.extend(
         [
             (BASE.Person, SH.property, BASE.personName),
@@ -62,6 +63,11 @@ def name_ps():
                 BASE.personName,
                 SH.description,
                 Literal("A person's name.", lang="en"),
+            ),
+            (
+                BASE.personName,
+                SH.message,
+                Literal("Error in person name data.", lang="en"),
             ),
         ]
     )
@@ -335,6 +341,7 @@ def person_shapeInfo():
         severity="warning",
         closed=True,
         ignoreProps=["rdf:type"],
+        messages={"en": "Something is wrong."},
     )
     expected_triples.extend(
         [
@@ -344,6 +351,7 @@ def person_shapeInfo():
             (BASE.Person, SH.targetClass, schema.Person),
             (BASE.Person, SH.severity, SH.Warning),
             (BASE.Person, SH.closed, Literal("True", datatype=XSD.boolean)),
+            (BASE.Person, SH.message, Literal("Something is wrong.", lang="en")),
         ]
     )
     expected_ttl.append("sh:ignoredProperties ( rdf:type ) ;")
