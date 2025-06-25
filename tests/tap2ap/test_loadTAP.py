@@ -33,6 +33,7 @@ def test_loadTAP():
     assert sh0Constraints[0]["propertyLabel"] == "Title"
     assert sh0Constraints[0]["note"] == "In English."
     assert sh0Constraints[0]["propertyDescription"] == "Title of the book."
+    assert sh0Constraints[0]["message"] == "Incorrect data for title."
     assert sh0Constraints[1]["propertyID"] == "dct:creator"
     assert sh0Constraints[2]["propertyID"] == "sdo:isbn"
     assert sh0Constraints[3]["propertyID"] == "rdf:type"
