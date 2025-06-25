@@ -17,7 +17,7 @@ class StatementTemplate:
     valueConstraintType: str = ""
     notes: dict = field(default_factory=dict)
     severity: str = ""
-    messages: dict = field(default_factory=dict)
+    message: dict = field(default_factory=dict)
     propertyDescriptions: dict = field(default_factory=dict)
 
     def add_property(self, propertyID):
@@ -145,9 +145,9 @@ class StatementTemplate:
             raise TypeError(msg)
 
     def add_message(self, lang, message):
-        """Append {lang: note} to messages dict."""
+        """Append {lang: note} to message dict."""
         if (type(lang) == str) and (type(message) == str):
-            self.messages[lang] = message
+            self.message[lang] = message
         else:
             msg = "Language identifier and message must be strings."
             raise TypeError(msg)

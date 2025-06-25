@@ -62,7 +62,7 @@ class ShapeInfo:
     ignoreProps: list = field(default_factory=list)
     mandatory: bool = False
     severity: str = ""
-    messages: dict = field(default_factory=dict)
+    message: dict = field(default_factory=dict)
     note: dict = field(default_factory=dict)
 
     def set_id(self, id):
@@ -172,9 +172,9 @@ class ShapeInfo:
             raise TypeError(msg)
 
     def add_message(self, lang, message):
-        """Append {lang: note} to messages dict."""
+        """Append {lang: note} to message dict."""
         if (type(lang) == str) and (type(message) == str):
-            self.messages[lang] = message
+            self.message[lang] = message
         else:
             msg = "Language identifier and message must be strings."
             raise TypeError(msg)

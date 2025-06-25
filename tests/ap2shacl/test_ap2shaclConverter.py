@@ -341,7 +341,7 @@ def person_shapeInfo():
         severity="warning",
         closed=True,
         ignoreProps=["rdf:type"],
-        messages={"en": "Something is wrong."},
+        message={"en": "Something is wrong."},
     )
     expected_triples.extend(
         [

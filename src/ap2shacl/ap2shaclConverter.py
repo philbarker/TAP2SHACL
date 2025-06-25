@@ -199,9 +199,9 @@ class AP2SHACLConverter:
                     self.sg, properties, "CURIE", self.ap.namespaces
                 )
                 self.sg.add((shape_uri, SH.ignoredProperties, ignore_list))
-            if shapeInfo[shape].messages:
-                for key in shapeInfo[shape].messages.keys():
-                    value = shapeInfo[shape].messages[key]
+            if shapeInfo[shape].message:
+                for key in shapeInfo[shape].message.keys():
+                    value = shapeInfo[shape].message[key]
                     message = Literal(value, lang=key)
                 self.sg.add((shape_uri, SH.message, message))
 
@@ -284,8 +284,8 @@ class AP2SHACLConverter:
                 for property in ps.properties:
                     path = str2URIRef(self.ap.namespaces, property)
                     self.sg.add((ps_uri, SH.path, path))
-                for lang in ps.messages:
-                    message = Literal(ps.messages[lang], lang=lang)
+                for lang in ps.message:
+                    message = Literal(ps.message[lang], lang=lang)
                     self.sg.add((ps_uri, SH.message, message))
                 if severity:
                     self.sg.add(((ps_uri, SH.severity, severity)))

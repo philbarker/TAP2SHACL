@@ -214,12 +214,12 @@ def test_add_propertyDescription(test_PS):
 
 def test_add_propertyMessage(test_PS):
     ps = test_PS
-    assert ps.messages == {}
+    assert ps.message == {}
     ps.add_message("en", "Something is wrong.")
-    assert ps.messages["en"] == "Something is wrong."
+    assert ps.message["en"] == "Something is wrong."
     ps.add_message("es", "Algo es incorrecto.")
-    assert ps.messages["en"] == "Something is wrong."
-    assert ps.messages["es"] == "Algo es incorrecto."
+    assert ps.message["en"] == "Something is wrong."
+    assert ps.message["es"] == "Algo es incorrecto."
     with pytest.raises(TypeError) as e:
         ps.add_message({"en": "type"})
     assert (
@@ -238,8 +238,8 @@ def test_add_propertyMessage(test_PS):
     assert (
         str(e.value) == "Language identifier and message must be strings."
     )
-    assert ps.messages["en"] == "Something is wrong."
-    assert ps.messages["es"] == "Algo es incorrecto."
+    assert ps.message["en"] == "Something is wrong."
+    assert ps.message["es"] == "Algo es incorrecto."
 
 def test_result(test_PS):
     # integration test sum of all above
@@ -260,6 +260,6 @@ def test_result(test_PS):
     assert ps.severity == "Violation"
     assert ps.propertyDescriptions["en"] == "Type of resource."
     assert ps.propertyDescriptions["es"] == "Tipo de recurso."
-    assert ps.messages["en"] == "Something is wrong."
-    assert ps.messages["es"] == "Algo es incorrecto."
+    assert ps.message["en"] == "Something is wrong."
+    assert ps.message["es"] == "Algo es incorrecto."
     # which doesn't make much sense, but it is what we entered

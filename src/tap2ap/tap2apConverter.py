@@ -74,7 +74,7 @@ class TAP2APConverter:
                 if "propertyDescription" in sc.keys():
                     self.convert_propertyDescriptions(sc["propertyDescription"], ps)
                 if "message" in sc.keys():
-                    self.convert_messages(sc["message"], ps)
+                    self.convert_message(sc["message"], ps)
                 self.ap.add_statementTemplate(ps)
 
     def check_shapeID(self, sh_id):
@@ -274,9 +274,9 @@ class TAP2APConverter:
             msg = 'source for namespaces must be "TAP" or "csv".'
             raise ValueError(msg)
 
-    def convert_messages(self, descStr, ps):
+    def convert_message(self, descStr, ps):
         """Take string as note and add it to a statementTemplate."""
-        # TODO: multiple messages, different languages
+        # TODO: multiple message, different languages
         # TODO: general convertString method for propertyDescription, note and labels
         if "lang" in self.ap.metadata.keys():
             lang = self.ap.metadata["lang"]
@@ -291,5 +291,5 @@ class TAP2APConverter:
         if type(descStr) == str:
             ps.add_message(lang, descStr)
         else:
-            msg = "Messages must be passed in a string."
+            msg = "message must be passed in a string."
             raise TypeError(msg)

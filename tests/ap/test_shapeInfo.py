@@ -145,12 +145,12 @@ def test_add_note(test_ShapeInfo: ShapeInfo):
 
 def test_add_message(test_ShapeInfo: ShapeInfo):
     sh = test_ShapeInfo
-    assert sh.messages == {}
+    assert sh.message == {}
     sh.add_message("en", "Something is wrong.")
-    assert sh.messages["en"] == "Something is wrong."
+    assert sh.message["en"] == "Something is wrong."
     sh.add_message("es", "Algo es incorrecto.")
-    assert sh.messages["en"] == "Something is wrong."
-    assert sh.messages["es"] == "Algo es incorrecto."
+    assert sh.message["en"] == "Something is wrong."
+    assert sh.message["es"] == "Algo es incorrecto."
     with pytest.raises(TypeError) as e:
         sh.add_message({"en": "type"})
     assert (
@@ -169,8 +169,8 @@ def test_add_message(test_ShapeInfo: ShapeInfo):
     assert (
         str(e.value) == "Language identifier and message must be strings."
     )
-    assert sh.messages["en"] == "Something is wrong."
-    assert sh.messages["es"] == "Algo es incorrecto."
+    assert sh.message["en"] == "Something is wrong."
+    assert sh.message["es"] == "Algo es incorrecto."
 
 
 
@@ -190,7 +190,7 @@ def test_read_shapeInfoDict():
             mandatory=True,
             severity="violation",
             note={},
-            messages={"en": "Error in Book data."}
+            message={"en": "Error in Book data."}
         ),
         "AuthorShape": ShapeInfo(
             id="AuthorShape",
