@@ -1,5 +1,5 @@
-shapeID,propertyID,propertyLabel,mandatory,repeatable,valueNodeType,valueDataType,valueConstraint,valueConstraintType,valueShape,note,severity,propertyDescription
-BookShape,dct:title,Title,TRUE,FALSE,Literal,rdf:langString,,,,,Violation,"Title of the book."
+shapeID,propertyID,propertyLabel,mandatory,repeatable,valueNodeType,valueDataType,valueConstraint,valueConstraintType,valueShape,note,severity,propertyDescription,message
+BookShape,dct:title,Title,TRUE,FALSE,Literal,rdf:langString,,,,,Violation,"Title of the book.","Error in title of book."
 BookShape,dct:creator,Author,FALSE,TRUE,IRI BNODE,,,,AuthorShape,,Warning,"Author of the book."
 BookShape,sdo:isbn,ISBN-13,FALSE,FALSE,Literal,xsd:string,^(\d{13})?$,pattern,,"Just the 13 numbers, no spaces or separators.",Violation
 BookShape,rdf:type,Type,TRUE,FALSE,IRI,,sdo:Book,,,,Warning

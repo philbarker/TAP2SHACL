@@ -1,3 +1,3 @@
-shapeID,label,comment,target,targetType,closed,mandatory,severity,Note
-BookShape,Book,Shape for describing books,sdo:Book,class,,TRUE,Violation,
+shapeID,label,comment,target,targetType,closed,mandatory,severity,message,Note
+BookShape,Book,Shape for describing books,sdo:Book,class,,TRUE,Violation,"Error in book data."
 AuthorShape,Author,Shape for describing authors,"dct:creator, dct:contributor",objectsof,TRUE,FALSE,Warning,

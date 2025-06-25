@@ -16,6 +16,7 @@
         <#bookshapeTitle> ,
         <#bookshapeType> ;
     sh:closed false ;
+    sh:message "Error in book data."@en ;
     sh:targetClass sdo:Book .
 
 <#AuthorShape> a sh:NodeShape ;
@@ -75,6 +76,7 @@
     sh:description "Title of the book."@en ;
     sh:nodeKind sh:Literal ;
     sh:path dct:title  ;
+    sh:message "Error in title of book."@en ;
     sh:severity sh:Violation .
 
 <#bookshapeType> a sh:PropertyShape ;
