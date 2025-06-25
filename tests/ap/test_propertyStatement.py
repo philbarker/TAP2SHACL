@@ -212,6 +212,34 @@ def test_add_propertyDescription(test_PS):
     assert ps.propertyDescriptions["en"] == "Type of resource."
     assert ps.propertyDescriptions["es"] == "Tipo de recurso."
 
+def test_add_propertyMessage(test_PS):
+    ps = test_PS
+    assert ps.messages == {}
+    ps.add_message("en", "Something is wrong.")
+    assert ps.messages["en"] == "Something is wrong."
+    ps.add_message("es", "Algo es incorrecto.")
+    assert ps.messages["en"] == "Something is wrong."
+    assert ps.messages["es"] == "Algo es incorrecto."
+    with pytest.raises(TypeError) as e:
+        ps.add_message({"en": "type"})
+    assert (
+        str(e.value)[:60]
+        == "StatementTemplate.add_message() missing 1 required positiona"
+    )
+    with pytest.raises(TypeError) as e:
+        ps.add_message("en", 2)
+    assert (
+        str(e.value) == "Language identifier and message must be strings."
+    )
+    with pytest.raises(TypeError) as e:
+        ps.add_message(
+            ["en", "es"], ["TType of resource.", "Tipo de recurso."]
+        )
+    assert (
+        str(e.value) == "Language identifier and message must be strings."
+    )
+    assert ps.messages["en"] == "Something is wrong."
+    assert ps.messages["es"] == "Algo es incorrecto."
 
 def test_result(test_PS):
     # integration test sum of all above
@@ -232,4 +260,6 @@ def test_result(test_PS):
     assert ps.severity == "Violation"
     assert ps.propertyDescriptions["en"] == "Type of resource."
     assert ps.propertyDescriptions["es"] == "Tipo de recurso."
+    assert ps.messages["en"] == "Something is wrong."
+    assert ps.messages["es"] == "Algo es incorrecto."
     # which doesn't make much sense, but it is what we entered
