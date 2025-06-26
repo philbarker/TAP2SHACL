@@ -224,7 +224,7 @@ class AP2SHACLConverter:
     def convert_statementTemplates(self):
         """Add the property statements from the application profile to the SHACL graph as property shapes."""
         # TODO: untangle this : there must be repeats that can be factored out
-        # TODO: consider if alterntves in sh.or could be special cases like type
+        # TODO: fix case when there are > 1 properties in template
         for ps in self.ap.statementTemplates:
             if len(ps.properties) > 1:  # Unusual case of alternative property paths
                 print(
@@ -253,14 +253,6 @@ class AP2SHACLConverter:
                     self.sg.add(
                         (str2URIRef(self.ap.namespaces, sh), SH.property, ps_opt_uri)
                     )
-            #            elif ps.properties == ["rdf:type"]:
-            # this is the way that TAP asserts objects must be of certain type, we can use sh:class instead
-            #                for shape in ps.shapes:
-            #                    shape_uri = str2URIRef(self.ap.namespaces, shape)
-            #                    for vc in ps.valueConstraints:
-            #                        type_uri = str2URIRef(self.ap.namespaces, vc)
-            #                        self.sg.add((shape_uri, SH_class, type_uri))
-            #                continue
             else:  # Normal case of just one property path
                 ps_name = make_property_shape_name(ps)
                 severity = self.convert_severity(ps.severity)
@@ -304,6 +296,9 @@ class AP2SHACLConverter:
                 if ps.valueShapes != []:
                     (shProp, val) = self.convert_valueShapes(ps.valueShapes)
                     self.sg.add((ps_uri, shProp, val))
+                if ps.valueClasses != []:
+                    (shProp, val) = self.convert_valueClasses(ps.valueClasses)
+                    self.sg.add((ps_uri, shProp, val))
                 if ps.mandatory:
                     self.sg.add((ps_uri, SH.minCount, Literal(1)))
                 if not ps.repeatable:
@@ -329,6 +324,31 @@ class AP2SHACLConverter:
                 bnode = BNode()
                 shapeURI = str2URIRef(self.ap.namespaces, shape)
                 self.sg.add((bnode, SH.node, shapeURI))
+                bnode_list.append(bnode)
+            p = SH_or
+            v = list2RDFList(self.sg, bnode_list, "bnode", self.ap.namespaces)
+            return (p, v)
+
+    def convert_valueClasses(self, class_ids):
+        """Return a duple of shacl property and value for class constraints.
+
+        If there is a single class id, the shacl property is sh:class and the value is the class URI; if there are more than one class ids, the shacl property is sh:or and the value is the first node in a list of BNodes each with predicate sh:class and object a class URI.
+        """
+        # see also convert valueDataTypes
+        # if you find yourself copying this structure again, generalize it
+        if len(class_ids) == 0:
+            msg = "No value classes to convert."
+            raise ValueError(msg)
+        elif len(class_ids) == 1:
+            p = SH_class
+            v = str2URIRef(self.ap.namespaces, class_ids[0])
+            return (p, v)
+        else:
+            bnode_list = list()
+            for class_id in class_ids:
+                bnode = BNode()
+                classURI = str2URIRef(self.ap.namespaces, class_id)
+                self.sg.add((bnode, SH_class, classURI))
                 bnode_list.append(bnode)
             p = SH_or
             v = list2RDFList(self.sg, bnode_list, "bnode", self.ap.namespaces)

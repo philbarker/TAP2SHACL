@@ -6,7 +6,6 @@ from ap2shacl import (
     AP,
     StatementTemplate,
     ShapeInfo,
-    read_shapeInfoDict,
     str2URIRef,
     convert_nodeKind,
 )
@@ -279,6 +278,30 @@ def address_ps():
 
 
 @pytest.fixture(scope="module")
+def alumniOf_ps():
+    ps = StatementTemplate()
+    ps.add_shape("#Person")
+    ps.add_property("schema:alumniOf")
+    ps.add_label("en", "Alumn Of")
+    ps.add_valueNodeType("iri")
+    ps.add_valueClass("schema:Organization")
+    ps.add_valueClass("schema:EducationalOrganization")
+    expected_triples.extend(
+        [
+            (BASE.Person, SH.property, BASE.personAlumnOf),
+            (BASE.personAlumnOf, RDF.type, SH.PropertyShape),
+            (BASE.personAlumnOf, SH.path, SDO.alumniOf),
+            (BASE.personAlumnOf, SH.name, Literal("Alumn Of", lang="en")),
+            (BASE.personAlumnOf, SH.nodeKind, SH.IRI),
+        ]
+    )
+    expected_ttl.append(
+        "sh:or ( [ sh:class schema:Organization ] [ sh:class schema:EducationalOrganization ] ) ;"
+    )
+    return ps
+
+
+@pytest.fixture(scope="module")
 def address_type_ps():
     ps = StatementTemplate()
     ps.add_shape("#Address")
@@ -398,6 +421,7 @@ def simple_ap(
     address_shapeInfo,
     address_type_ps,
     address_option_ps,
+    alumniOf_ps,
 ):
     ap = AP()
     ap.load_namespaces("tests/ap2shacl/TestData/namespaces.csv")
@@ -415,6 +439,7 @@ def simple_ap(
     ap.add_shapeInfo("#Address", address_shapeInfo)
     ap.add_statementTemplate(address_type_ps)
     ap.add_statementTemplate(address_option_ps)
+    ap.add_statementTemplate(alumniOf_ps)
     expected_ttl.append(
         "@base <http://example.org/shapes#> .",
     )
@@ -484,7 +509,7 @@ def test_ap2shaclInit(simple_ap):
     assert "dct" in converter.ap.namespaces.keys()
     assert "rdf" in converter.ap.namespaces.keys()
     assert "sh" in converter.ap.namespaces.keys()
-    assert len(converter.ap.statementTemplates) == 10
+    assert len(converter.ap.statementTemplates) == 11
     assert len(converter.ap.shapeInfo) == 2
     assert type(converter.sg) == Graph
 
