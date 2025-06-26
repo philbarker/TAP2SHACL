@@ -260,6 +260,22 @@ def test_convert_shapes(test_Converter):
     assert str(e.value) == "No shape info for notAShapeID"
 
 
+def test_convert_valueClasses(test_Converter):
+    c = test_Converter
+    ps = StatementTemplate()
+    assert ps.valueClasses == []
+    valueClasses = "schema:Address,schema:Person"
+    c.convert_valueClasses(valueClasses, ps)
+    assert ps.valueClasses == ["schema:Address", "schema:Person"]
+    c.convert_valueClasses(
+        "schema:Address", ps
+    )  # adding a class a second time should have no effect
+    assert ps.valueClasses == ["schema:Address", "schema:Person"]
+    with pytest.raises(TypeError) as e:
+        c.convert_valueClasses(["schema:Address", "schema:Person"], ps)
+    assert str(e.value) == "Value for class IDs must be a string."
+
+
 def test_convert_notes(test_Converter):
     c = test_Converter
     ps = StatementTemplate()
@@ -295,6 +311,7 @@ def test_convert_severity(test_Converter):
         c.convert_severity(sev, ps)
     assert str(e.value) == "Value for severity must be a string."
 
+
 def test_convert_message(test_Converter):
     c = test_Converter
     ps = StatementTemplate()
@@ -305,6 +322,7 @@ def test_convert_message(test_Converter):
     with pytest.raises(TypeError) as e:
         c.convert_message(message, ps)
     assert str(e.value) == "message must be passed in a string."
+
 
 def test_convert_TAP_AP(test_Converter):
     c = test_Converter

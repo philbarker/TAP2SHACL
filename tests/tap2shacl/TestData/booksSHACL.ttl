@@ -55,6 +55,7 @@
     sh:nodeKind sh:BlankNodeOrIRI ;
     sh:path dct:creator ;
     sh:description "Author of the book."@en ;
+    sh:class foaf:Person ;
     sh:severity sh:Warning .
 
 

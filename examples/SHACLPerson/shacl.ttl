@@ -2,26 +2,29 @@
 @base <http://example.org/> .
 @prefix ex: <http://example.org/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <PersonShape> a sh:NodeShape ;
+    rdfs:label "Person Shape"@en ;
+    rdfs:comment "Node shape for person class"@en ;
     sh:closed true ;
-    sh:description "Node shape for person class"@en ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:name "Person Shape"@en ;
     sh:property <personshapeEmployer>,
         <personshapeSocialSecurityNumber> ;
+    sh:severity sh:Violation ;
     sh:targetClass <Person> .
 
 <CompanyShape> a sh:NodeShape ;
-    sh:class <Company> ;
+    rdfs:label "Employer"@en ;
+    rdfs:comment "Shape for employers"@en ;
     sh:closed false ;
-    sh:description "Shape for employers"@en ;
-    sh:name "Employer"@en ;
+    sh:severity sh:Violation ;
     sh:targetObjectsOf <woksFor> .
 
 <personshapeEmployer> a sh:PropertyShape ;
+    sh:class <Company> ;
     sh:name "Employer"@en-US ;
     sh:node <CompanyShape> ;
     sh:nodeKind sh:IRI ;

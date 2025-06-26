@@ -14,7 +14,9 @@
 
 extra_statement_template_elements:
  - severity
-# - max
+ - propertyDescription
+ - message
+ - valueClass
 
 ## This module has three built-in value node types: "iri", "literal", and "bnode".
 ## Extra node types can be added here, for example as aliases, such as "uri" for "iri",

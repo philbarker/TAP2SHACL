@@ -50,6 +50,8 @@
     sh:severity sh:Warning .
 
 <bookshapeAuthor> a sh:PropertyShape ;
+    sh:class foaf:Person ;
+    sh:description "Author of the book."@en ;
     sh:name "Author"@en-US ;
     sh:node <AuthorShape> ;
     sh:nodeKind sh:BlankNodeOrIRI ;
@@ -59,6 +61,7 @@
 <bookshapeISBN-13> a sh:PropertyShape ;
     rdfs:comment "Just checks for 13 digits."@en ;
     sh:datatype xsd:string ;
+    sh:description "ISBN13, with no spaces"@en ;
     sh:maxCount 1 ;
     sh:name "ISBN-13"@en-US ;
     sh:nodeKind sh:Literal ;
@@ -68,6 +71,7 @@
 
 <bookshapeTitle> a sh:PropertyShape ;
     sh:datatype rdf:langString ;
+    sh:description "Title of the book."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
     sh:name "Title"@en-US ;

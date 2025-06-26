@@ -146,6 +146,19 @@ def test_add_valueShape(test_PS):
     assert ps.valueShapes == ["Person", "Organization"]
 
 
+def test_add_valueClass(test_PS):
+    ps = test_PS
+    assert ps.valueClasses == []
+    ps.add_valueClass("sdo:Person")
+    assert ps.valueClasses == ["sdo:Person"]
+    ps.add_valueClass("sdo:Organization")
+    assert ps.valueClasses == ["sdo:Person", "sdo:Organization"]
+    with pytest.raises(TypeError) as e:
+        ps.add_valueClass(["Entity"])
+    assert str(e.value) == "Class ID must be a string."
+    assert ps.valueClasses == ["sdo:Person", "sdo:Organization"]
+
+
 def test_add_note(test_PS):
     ps = test_PS
     assert ps.notes == {}
@@ -212,6 +225,7 @@ def test_add_propertyDescription(test_PS):
     assert ps.propertyDescriptions["en"] == "Type of resource."
     assert ps.propertyDescriptions["es"] == "Tipo de recurso."
 
+
 def test_add_propertyMessage(test_PS):
     ps = test_PS
     assert ps.message == {}
@@ -228,18 +242,13 @@ def test_add_propertyMessage(test_PS):
     )
     with pytest.raises(TypeError) as e:
         ps.add_message("en", 2)
-    assert (
-        str(e.value) == "Language identifier and message must be strings."
-    )
+    assert str(e.value) == "Language identifier and message must be strings."
     with pytest.raises(TypeError) as e:
-        ps.add_message(
-            ["en", "es"], ["TType of resource.", "Tipo de recurso."]
-        )
-    assert (
-        str(e.value) == "Language identifier and message must be strings."
-    )
+        ps.add_message(["en", "es"], ["TType of resource.", "Tipo de recurso."])
+    assert str(e.value) == "Language identifier and message must be strings."
     assert ps.message["en"] == "Something is wrong."
     assert ps.message["es"] == "Algo es incorrecto."
+
 
 def test_result(test_PS):
     # integration test sum of all above
@@ -255,6 +264,7 @@ def test_result(test_PS):
     assert ps.valueConstraints == ["ex:example", r"^http:\/\/example\.org/$"]
     assert ps.valueConstraintType == "picklist"
     assert ps.valueShapes == ["Person", "Organization"]
+    assert ps.valueClasses == ["sdo:Person", "sdo:Organization"]
     assert ps.notes["en"] == "This is the type."
     assert ps.notes["es"] == "Este es el tipo."
     assert ps.severity == "Violation"
