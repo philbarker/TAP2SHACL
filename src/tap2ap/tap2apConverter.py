@@ -13,6 +13,7 @@ falseVals = ["false", "no", "f", "n", "0"]  # ... I think dctap normalises this
 prop_splitters = ", |; |,|;| \n| |\n"
 nodeType_splitters = ", |; |,|;| \n| |\n"
 dataType_splitters = ", |; |,|;| \n| |\n"
+class_splitters = ", |; |,|;| \n| |\n"
 constraint_splitters = ", |; |,|;| \n| |\n"
 shape_splitters = ", |; |,|;| \n| |\n"
 
@@ -67,6 +68,8 @@ class TAP2APConverter:
                     self.convert_valueConstraintType(sc["valueConstraintType"], ps)
                 if "valueShape" in sc.keys():
                     self.convert_valueShapes(sc["valueShape"], ps)
+                if "valueClass" in sc.keys():
+                    self.convert_valueClasses(sc["valueClass"], ps)
                 if "note" in sc.keys():
                     self.convert_notes(sc["note"], ps)
                 if "severity" in sc.keys():
@@ -205,6 +208,16 @@ class TAP2APConverter:
                 ps.add_valueShape(shape)
         else:
             msg = "Value for shapes must be a string."
+            raise TypeError(msg)
+
+    def convert_valueClasses(self, classesStr, ps):
+        """Convert a string of class IDs into separate items and add them as values of the `valueClasses` property of statementTemplate."""
+
+        if type(classesStr) == str:
+            for classID in re.split(shape_splitters, classesStr):
+                ps.add_valueClass(classID)
+        else:
+            msg = "Value for class IDs must be a string."
             raise TypeError(msg)
 
     def convert_notes(self, noteStr, ps):
