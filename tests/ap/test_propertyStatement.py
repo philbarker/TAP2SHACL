@@ -145,6 +145,7 @@ def test_add_valueShape(test_PS):
     assert str(e.value) == "Shape must be a string."
     assert ps.valueShapes == ["Person", "Organization"]
 
+
 def test_add_valueClass(test_PS):
     ps = test_PS
     assert ps.valueClasses == []
@@ -224,6 +225,7 @@ def test_add_propertyDescription(test_PS):
     assert ps.propertyDescriptions["en"] == "Type of resource."
     assert ps.propertyDescriptions["es"] == "Tipo de recurso."
 
+
 def test_add_propertyMessage(test_PS):
     ps = test_PS
     assert ps.message == {}
@@ -240,18 +242,13 @@ def test_add_propertyMessage(test_PS):
     )
     with pytest.raises(TypeError) as e:
         ps.add_message("en", 2)
-    assert (
-        str(e.value) == "Language identifier and message must be strings."
-    )
+    assert str(e.value) == "Language identifier and message must be strings."
     with pytest.raises(TypeError) as e:
-        ps.add_message(
-            ["en", "es"], ["TType of resource.", "Tipo de recurso."]
-        )
-    assert (
-        str(e.value) == "Language identifier and message must be strings."
-    )
+        ps.add_message(["en", "es"], ["TType of resource.", "Tipo de recurso."])
+    assert str(e.value) == "Language identifier and message must be strings."
     assert ps.message["en"] == "Something is wrong."
     assert ps.message["es"] == "Algo es incorrecto."
+
 
 def test_result(test_PS):
     # integration test sum of all above

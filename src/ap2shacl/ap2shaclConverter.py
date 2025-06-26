@@ -182,9 +182,7 @@ class AP2SHACLConverter:
                 self._covertTargets(shapeInfo[shape].targets, shape_uri)
             if shapeInfo[shape].severity:
                 severity = self.convert_severity(shapeInfo[shape].severity)
-                self.sg.add (
-                    (shape_uri, SH.severity, severity)
-                )
+                self.sg.add((shape_uri, SH.severity, severity))
             if shapeInfo[shape].closed == True:
                 self.sg.add(
                     (shape_uri, SH.closed, Literal("True", datatype=XSD.boolean))
@@ -228,7 +226,7 @@ class AP2SHACLConverter:
         # TODO: untangle this : there must be repeats that can be factored out
         # TODO: consider if alterntves in sh.or could be special cases like type
         for ps in self.ap.statementTemplates:
-            if len(ps.properties) > 1:   # Unusual case of alternative property paths 
+            if len(ps.properties) > 1:  # Unusual case of alternative property paths
                 print(
                     "# Warning: property template with multiple properties is not fully supported."
                 )
@@ -263,7 +261,7 @@ class AP2SHACLConverter:
             #                        type_uri = str2URIRef(self.ap.namespaces, vc)
             #                        self.sg.add((shape_uri, SH_class, type_uri))
             #                continue
-            else:          # Normal case of just one property path
+            else:  # Normal case of just one property path
                 ps_name = make_property_shape_name(ps)
                 severity = self.convert_severity(ps.severity)
                 ps_uri = str2URIRef(self.ap.namespaces, ps_name)
