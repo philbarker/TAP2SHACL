@@ -179,7 +179,7 @@ class AP2SHACLConverter:
                     comment = Literal(value, lang=key)
                     self.sg.add((shape_uri, RDFS.comment, comment))
             if shapeInfo[shape].targets:
-                self._covertTargets(shapeInfo[shape].targets, shape_uri)
+                self._convertTargets(shapeInfo[shape].targets, shape_uri)
             if shapeInfo[shape].severity:
                 severity = self.convert_severity(shapeInfo[shape].severity)
                 self.sg.add((shape_uri, SH.severity, severity))
@@ -203,7 +203,7 @@ class AP2SHACLConverter:
                     message = Literal(value, lang=key)
                 self.sg.add((shape_uri, SH.message, message))
 
-    def _covertTargets(self, targets, shape_uri):
+    def _convertTargets(self, targets, shape_uri):
         for key in targets.keys():
             for targetStr in targets[key]:
                 target = str2URIRef(self.ap.namespaces, targetStr)
