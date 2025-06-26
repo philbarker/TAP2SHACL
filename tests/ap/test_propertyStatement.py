@@ -145,6 +145,18 @@ def test_add_valueShape(test_PS):
     assert str(e.value) == "Shape must be a string."
     assert ps.valueShapes == ["Person", "Organization"]
 
+def test_add_valueClass(test_PS):
+    ps = test_PS
+    assert ps.valueClasses == []
+    ps.add_valueClass("sdo:Person")
+    assert ps.valueClasses == ["sdo:Person"]
+    ps.add_valueClass("sdo:Organization")
+    assert ps.valueClasses == ["sdo:Person", "sdo:Organization"]
+    with pytest.raises(TypeError) as e:
+        ps.add_valueClass(["Entity"])
+    assert str(e.value) == "Class ID must be a string."
+    assert ps.valueClasses == ["sdo:Person", "sdo:Organization"]
+
 
 def test_add_note(test_PS):
     ps = test_PS
@@ -255,6 +267,7 @@ def test_result(test_PS):
     assert ps.valueConstraints == ["ex:example", r"^http:\/\/example\.org/$"]
     assert ps.valueConstraintType == "picklist"
     assert ps.valueShapes == ["Person", "Organization"]
+    assert ps.valueClasses == ["sdo:Person", "sdo:Organization"]
     assert ps.notes["en"] == "This is the type."
     assert ps.notes["es"] == "Este es el tipo."
     assert ps.severity == "Violation"

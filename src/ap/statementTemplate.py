@@ -13,6 +13,7 @@ class StatementTemplate:
     valueNodeTypes: list = field(default_factory=list)
     valueDataTypes: list = field(default_factory=list)
     valueShapes: list = field(default_factory=list)
+    valueClasses: list = field(default_factory=list)
     valueConstraints: list = field(default_factory=list)
     valueConstraintType: str = ""
     notes: dict = field(default_factory=dict)
@@ -100,6 +101,17 @@ class StatementTemplate:
                 self.valueShapes.append(shapeID)
         else:
             msg = "Shape must be a string."
+            raise TypeError(msg)
+
+    def add_valueClass(self, classID):
+        """Append classID to valueClasses list"""
+        if type(classID) == str:
+            if classID in self.valueClasses:
+                pass
+            else:
+                self.valueClasses.append(classID)
+        else:
+            msg = "Class ID must be a string."
             raise TypeError(msg)
 
     def add_valueConstraint(self, constraint):
