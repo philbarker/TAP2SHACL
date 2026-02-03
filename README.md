@@ -1,3 +1,8 @@
+
+This repository has move to Codeberg, [https://codeberg.org/philbarker/TAP2SHACL](https://codeberg.org/philbarker/TAP2SHACL).
+
+
+
 Reads a Dublin Core [Tabular Application Profile](https://github.com/dcmi/dctap), with some extensions, and converts it to [SHACL](https://www.w3.org/TR/shacl/).
 
 WARNING: beta version, use at own risk.
